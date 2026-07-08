@@ -41,62 +41,63 @@ public class RawMaterialManager {
     public static void viewRawMaterials() {
 
         String sql = """
-            SELECT rm.material_id,
-                   s.supplier_name,
-                   rm.material_name,
-                   rm.unit,
-                   rm.cost_per_unit,
-                   rm.status
-            FROM raw_materials rm
-            INNER JOIN suppliers s
-            ON rm.supplier_id = s.supplier_id
-            WHERE rm.status = 'ACTIVE'
-            ORDER BY rm.material_id
-            """;
+        SELECT rm.material_id,
+               s.supplier_name,
+               rm.material_name,
+               rm.unit,
+               rm.cost_per_unit,
+               rm.status
+        FROM raw_materials rm
+        INNER JOIN suppliers s
+        ON rm.supplier_id = s.supplier_id
+        WHERE rm.status = 'ACTIVE'
+        ORDER BY rm.material_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery()
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
         ) {
 
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tAVAILABLE RAW MATERIALS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tSupplier\tMaterial\tUnit\tCost");
-            System.out.println("--------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tAVAILABLE RAW MATERIALS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("material_id") + "\t"
-                                + resultSet.getString("supplier_name") + "\t"
-                                + resultSet.getString("material_name") + "\t"
-                                + resultSet.getString("unit") + "\t"
-                                + resultSet.getDouble("cost_per_unit"));
-
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Material ID    : "
+                        + resultSet.getInt("material_id"));
+                System.out.println("Supplier       : "
+                        + resultSet.getString("supplier_name"));
+                System.out.println("Material Name  : "
+                        + resultSet.getString("material_name"));
+                System.out.println("Unit           : "
+                        + resultSet.getString("unit"));
+                System.out.println("Cost Per Unit  : "
+                        + String.format("₹%,.2f",
+                        resultSet.getDouble("cost_per_unit")));
+                System.out.println("Status         : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
             }
-
             if (!found) {
-
+                System.out.println();
                 System.out.println("No raw materials found.");
-
             }
-
         } catch (SQLException e) {
-
             System.out.println("Unable to view raw materials.");
             e.printStackTrace();
-
         }
-
     }
 
     public static boolean rawMaterialExists(int materialId) {
@@ -217,19 +218,19 @@ public class RawMaterialManager {
     public static void searchRawMaterial(String keyword) {
 
         String sql = """
-            SELECT rm.material_id,
-                   s.supplier_name,
-                   rm.material_name,
-                   rm.unit,
-                   rm.cost_per_unit,
-                   rm.status
-            FROM raw_materials rm
-            INNER JOIN suppliers s
-            ON rm.supplier_id = s.supplier_id
-            WHERE rm.material_name LIKE ?
-            AND rm.status = 'ACTIVE'
-            ORDER BY rm.material_name
-            """;
+        SELECT rm.material_id,
+               s.supplier_name,
+               rm.material_name,
+               rm.unit,
+               rm.cost_per_unit,
+               rm.status
+        FROM raw_materials rm
+        INNER JOIN suppliers s
+        ON rm.supplier_id = s.supplier_id
+        WHERE rm.material_name LIKE ?
+        AND rm.status = 'ACTIVE'
+        ORDER BY rm.material_name
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -244,24 +245,30 @@ public class RawMaterialManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tSupplier\tMaterial\tUnit\tCost");
-            System.out.println("--------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("material_id") + "\t"
-                                + resultSet.getString("supplier_name") + "\t"
-                                + resultSet.getString("material_name") + "\t"
-                                + resultSet.getString("unit") + "\t"
-                                + resultSet.getDouble("cost_per_unit"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Material ID    : "
+                        + resultSet.getInt("material_id"));
+                System.out.println("Supplier       : "
+                        + resultSet.getString("supplier_name"));
+                System.out.println("Material Name  : "
+                        + resultSet.getString("material_name"));
+                System.out.println("Unit           : "
+                        + resultSet.getString("unit"));
+                System.out.println("Cost Per Unit  : "
+                        + String.format("₹%,.2f",
+                        resultSet.getDouble("cost_per_unit")));
+                System.out.println("Status         : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -270,6 +277,8 @@ public class RawMaterialManager {
                 System.out.println("No matching raw material found.");
 
             }
+
+            resultSet.close();
 
         } catch (SQLException e) {
 
@@ -309,8 +318,8 @@ public class RawMaterialManager {
             while (resultSet.next()) {
 
                 System.out.println(
-                        resultSet.getInt("material_id")
-                                + "\t"
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("material_id")), 5)
                                 + resultSet.getString("material_name"));
 
             }

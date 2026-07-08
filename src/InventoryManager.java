@@ -37,50 +37,55 @@ public class InventoryManager {
     public static void viewInventory() {
 
         String sql = """
-            SELECT i.inventory_id,
-                   rm.material_name,
-                   i.current_stock,
-                   i.minimum_stock,
-                   i.maximum_stock
-            FROM inventory i
-            INNER JOIN raw_materials rm
-            ON i.material_id = rm.material_id
-            ORDER BY i.inventory_id
-            """;
+        SELECT i.inventory_id,
+               rm.material_name,
+               i.current_stock,
+               i.minimum_stock,
+               i.maximum_stock
+        FROM inventory i
+        INNER JOIN raw_materials rm
+        ON i.material_id = rm.material_id
+        ORDER BY i.inventory_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery()
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
         ) {
 
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tCURRENT INVENTORY");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMaterial\tStock\tMin\tMax");
-            System.out.println("------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tCURRENT INVENTORY");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("inventory_id") + "\t"
-                                + resultSet.getString("material_name") + "\t"
-                                + resultSet.getDouble("current_stock") + "\t"
-                                + resultSet.getDouble("minimum_stock") + "\t"
-                                + resultSet.getDouble("maximum_stock"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Inventory ID   : "
+                        + resultSet.getInt("inventory_id"));
+                System.out.println("Material       : "
+                        + resultSet.getString("material_name"));
+                System.out.println("Current Stock  : "
+                        + resultSet.getDouble("current_stock"));
+                System.out.println("Minimum Stock  : "
+                        + resultSet.getDouble("minimum_stock"));
+                System.out.println("Maximum Stock  : "
+                        + resultSet.getDouble("maximum_stock"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No inventory records found.");
 
             }
@@ -201,17 +206,17 @@ public class InventoryManager {
     public static void searchInventory(String keyword) {
 
         String sql = """
-            SELECT i.inventory_id,
-                   rm.material_name,
-                   i.current_stock,
-                   i.minimum_stock,
-                   i.maximum_stock
-            FROM inventory i
-            INNER JOIN raw_materials rm
-            ON i.material_id = rm.material_id
-            WHERE rm.material_name LIKE ?
-            ORDER BY rm.material_name
-            """;
+        SELECT i.inventory_id,
+               rm.material_name,
+               i.current_stock,
+               i.minimum_stock,
+               i.maximum_stock
+        FROM inventory i
+        INNER JOIN raw_materials rm
+        ON i.material_id = rm.material_id
+        WHERE rm.material_name LIKE ?
+        ORDER BY rm.material_name
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -226,24 +231,27 @@ public class InventoryManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMaterial\tStock\tMin\tMax");
-            System.out.println("------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("inventory_id") + "\t"
-                                + resultSet.getString("material_name") + "\t"
-                                + resultSet.getDouble("current_stock") + "\t"
-                                + resultSet.getDouble("minimum_stock") + "\t"
-                                + resultSet.getDouble("maximum_stock"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Inventory ID   : "
+                        + resultSet.getInt("inventory_id"));
+                System.out.println("Material       : "
+                        + resultSet.getString("material_name"));
+                System.out.println("Current Stock  : "
+                        + resultSet.getDouble("current_stock"));
+                System.out.println("Minimum Stock  : "
+                        + resultSet.getDouble("minimum_stock"));
+                System.out.println("Maximum Stock  : "
+                        + resultSet.getDouble("maximum_stock"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -252,6 +260,8 @@ public class InventoryManager {
                 System.out.println("No matching inventory found.");
 
             }
+
+            resultSet.close();
 
         } catch (SQLException e) {
 
@@ -293,6 +303,54 @@ public class InventoryManager {
         }
 
         return false;
+
+    }
+
+    public static void showInventoryList() {
+
+        String sql = """
+        SELECT i.inventory_id,
+               rm.material_name
+        FROM inventory i
+        INNER JOIN raw_materials rm
+        ON i.material_id = rm.material_id
+        ORDER BY i.inventory_id
+        """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
+        ) {
+
+            System.out.println();
+            System.out.println("==========================================");
+            System.out.println("\tCURRENT INVENTORY");
+            System.out.println("==========================================");
+            System.out.println();
+
+            System.out.println("ID\tMaterial");
+            System.out.println("------------------------------------------");
+
+            while (resultSet.next()) {
+
+                System.out.println(
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("inventory_id")), 5)
+                                + resultSet.getString("material_name"));
+
+            }
+
+            System.out.println();
+
+        } catch (SQLException e) {
+
+            System.out.println("Unable to load inventory.");
+            e.printStackTrace();
+
+        }
 
     }
 

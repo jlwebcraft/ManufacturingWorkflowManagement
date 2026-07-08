@@ -8,17 +8,17 @@ public class ReportManager {
     public static void inventoryReport() {
 
         String sql = """
-                SELECT
-                    rm.material_name,
-                    i.current_stock,
-                    i.minimum_stock,
-                    i.maximum_stock,
-                    rm.unit
-                FROM inventory i
-                INNER JOIN raw_materials rm
-                    ON i.material_id = rm.material_id
-                ORDER BY rm.material_name
-                """;
+            SELECT
+                rm.material_name,
+                i.current_stock,
+                i.minimum_stock,
+                i.maximum_stock,
+                rm.unit
+            FROM inventory i
+            INNER JOIN raw_materials rm
+                ON i.material_id = rm.material_id
+            ORDER BY rm.material_name
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -31,30 +31,34 @@ public class ReportManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tINVENTORY REPORT");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("Material\tCurrent\tMin\tMax\tUnit");
-            System.out.println("---------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tINVENTORY REPORT");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getString("material_name") + "\t"
-                                + resultSet.getDouble("current_stock") + "\t"
-                                + resultSet.getDouble("minimum_stock") + "\t"
-                                + resultSet.getDouble("maximum_stock") + "\t"
-                                + resultSet.getString("unit")
-                );
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Material        : "
+                        + resultSet.getString("material_name"));
+                System.out.println("Current Stock   : "
+                        + resultSet.getDouble("current_stock") + " "
+                        + resultSet.getString("unit"));
+                System.out.println("Minimum Stock   : "
+                        + resultSet.getDouble("minimum_stock") + " "
+                        + resultSet.getString("unit"));
+                System.out.println("Maximum Stock   : "
+                        + resultSet.getDouble("maximum_stock") + " "
+                        + resultSet.getString("unit"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No inventory records found.");
 
             }
@@ -114,6 +118,8 @@ public class ReportManager {
                 System.out.println("Minimum  : "
                         + resultSet.getDouble("minimum_stock") + " "
                         + resultSet.getString("unit"));
+
+                System.out.println("------------------------------------------");
 
             }
 
@@ -195,6 +201,8 @@ public class ReportManager {
                 System.out.println("Date      : "
                         + resultSet.getString("created_at"));
 
+                System.out.println("------------------------------------------");
+
             }
 
             if (!found) {
@@ -266,6 +274,8 @@ public class ReportManager {
 
                 System.out.println("Next Service : "
                         + resultSet.getString("next_service_date"));
+
+                System.out.println("------------------------------------------");
 
             }
 

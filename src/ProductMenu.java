@@ -85,7 +85,7 @@ public class ProductMenu {
 
                 case 3:
 
-                    ProductManager.viewProducts();
+                    ProductManager.showProductList();
 
                     ProductCategoryManager.showCategoryList();
 
@@ -137,7 +137,7 @@ public class ProductMenu {
 
                 case 4:
 
-                    ProductManager.viewProducts();
+                    ProductManager.showProductList();
 
                     System.out.print("Enter Product ID: ");
                     int deleteId = Integer.parseInt(scanner.nextLine());

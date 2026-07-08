@@ -59,7 +59,7 @@ public class ProductCategoryManager {
             System.out.println();
             System.out.println("============= AVAILABLE CATEGORIES =============");
             System.out.println();
-            System.out.println("ID\tCategory Name\t\tDescription");
+            System.out.println("ID\tCategory Name\t\t\tDescription");
             System.out.println("--------------------------------------------------------------");
 
             boolean found=false;
@@ -69,8 +69,8 @@ public class ProductCategoryManager {
                 found = true;
 
                 System.out.println(
-                        resultSet.getInt("category_id") + "\t"
-                                + resultSet.getString("category_name") + "\t\t"
+                        ConsoleFormatter.padRight(String.valueOf(resultSet.getInt("category_id")), 4)
+                                + ConsoleFormatter.padRight(resultSet.getString("category_name"), 24)
                                 + resultSet.getString("description"));
 
             }
@@ -321,6 +321,20 @@ public class ProductCategoryManager {
         }
 
         return false;
+
+    }
+
+    private static String padRight(String text, int length) {
+
+        StringBuilder builder = new StringBuilder(text);
+
+        while (builder.length() < length) {
+
+            builder.append(" ");
+
+        }
+
+        return builder.toString();
 
     }
 

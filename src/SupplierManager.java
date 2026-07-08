@@ -42,49 +42,60 @@ public class SupplierManager {
     public static void viewSuppliers() {
 
         String sql = """
-            SELECT supplier_id,
-                   supplier_name,
-                   contact_person,
-                   phone,
-                   email,
-                   address,
-                   status
-            FROM suppliers
-            WHERE status = 'ACTIVE'
-            ORDER BY supplier_id
-            """;
+        SELECT supplier_id,
+               supplier_name,
+               contact_person,
+               phone,
+               email,
+               address,
+               status
+        FROM suppliers
+        WHERE status = 'ACTIVE'
+        ORDER BY supplier_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery()
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
         ) {
 
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tAVAILABLE SUPPLIERS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tSupplier\tContact\t\tPhone");
-            System.out.println("----------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tAVAILABLE SUPPLIERS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("supplier_id") + "\t"
-                                + resultSet.getString("supplier_name") + "\t"
-                                + resultSet.getString("contact_person") + "\t"
-                                + resultSet.getString("phone"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Supplier ID    : "
+                        + resultSet.getInt("supplier_id"));
+                System.out.println("Supplier Name  : "
+                        + resultSet.getString("supplier_name"));
+                System.out.println("Contact Person : "
+                        + resultSet.getString("contact_person"));
+                System.out.println("Phone          : "
+                        + resultSet.getString("phone"));
+                System.out.println("Email          : "
+                        + resultSet.getString("email"));
+                System.out.println("Address        : "
+                        + resultSet.getString("address"));
+                System.out.println("Status         : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No suppliers found.");
 
             }
@@ -218,16 +229,18 @@ public class SupplierManager {
     public static void searchSupplier(String keyword) {
 
         String sql = """
-            SELECT supplier_id,
-                   supplier_name,
-                   contact_person,
-                   phone,
-                   status
-            FROM suppliers
-            WHERE supplier_name LIKE ?
-            AND status = 'ACTIVE'
-            ORDER BY supplier_name
-            """;
+        SELECT supplier_id,
+               supplier_name,
+               contact_person,
+               phone,
+               email,
+               address,
+               status
+        FROM suppliers
+        WHERE supplier_name LIKE ?
+        AND status = 'ACTIVE'
+        ORDER BY supplier_name
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -242,23 +255,31 @@ public class SupplierManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tSupplier\tContact\t\tPhone");
-            System.out.println("----------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("supplier_id") + "\t"
-                                + resultSet.getString("supplier_name") + "\t"
-                                + resultSet.getString("contact_person") + "\t"
-                                + resultSet.getString("phone"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Supplier ID    : "
+                        + resultSet.getInt("supplier_id"));
+                System.out.println("Supplier Name  : "
+                        + resultSet.getString("supplier_name"));
+                System.out.println("Contact Person : "
+                        + resultSet.getString("contact_person"));
+                System.out.println("Phone          : "
+                        + resultSet.getString("phone"));
+                System.out.println("Email          : "
+                        + resultSet.getString("email"));
+                System.out.println("Address        : "
+                        + resultSet.getString("address"));
+                System.out.println("Status         : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -267,6 +288,8 @@ public class SupplierManager {
                 System.out.println("No matching supplier found.");
 
             }
+
+            resultSet.close();
 
         } catch (SQLException e) {
 
@@ -299,13 +322,14 @@ public class SupplierManager {
             System.out.println("==========================================");
             System.out.println();
 
-            System.out.println("ID\tSupplier Name");
-            System.out.println("------------------------------------------");
+            System.out.println("ID\tSupplier");
+            System.out.println("----------------------------------------");
 
             while (resultSet.next()) {
 
                 System.out.println(
-                        resultSet.getInt("supplier_id") + "\t"
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("supplier_id")), 5)
                                 + resultSet.getString("supplier_name"));
 
             }

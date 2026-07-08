@@ -108,7 +108,7 @@ public class ProductionOrderMenu {
 
                 case 3 -> {
 
-                    ProductionOrderManager.viewProductionOrders();
+                    ProductionOrderManager.showProductionOrderList();
 
                     System.out.print("Enter Order ID: ");
                     int orderId = Integer.parseInt(scanner.nextLine());
@@ -163,7 +163,7 @@ public class ProductionOrderMenu {
                 }
 
                 case 4 -> {
-                    ProductionOrderManager.viewProductionOrders();
+                    ProductionOrderManager.showProductionOrderList();
 
                     System.out.print("Enter Order ID: ");
                     int orderId = Integer.parseInt(scanner.nextLine());

@@ -111,7 +111,7 @@ public class InventoryMenu {
 
                 case 3 -> {
 
-                    InventoryManager.viewInventory();
+                    InventoryManager.showInventoryList();
 
                     System.out.print("Enter Inventory ID: ");
                     int inventoryId = Integer.parseInt(scanner.nextLine());
@@ -132,7 +132,7 @@ public class InventoryMenu {
 
                 case 4 -> {
 
-                    InventoryManager.viewInventory();
+                    InventoryManager.showInventoryList();
 
                     System.out.print("Enter Inventory ID: ");
                     int inventoryId = Integer.parseInt(scanner.nextLine());

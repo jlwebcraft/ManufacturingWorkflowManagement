@@ -70,7 +70,7 @@ public class SupplierMenu {
                 }
 
                 case 3-> {
-                    SupplierManager.viewSuppliers();
+                    SupplierManager.showSupplierList();
 
                     System.out.print("Enter Supplier ID: ");
 
@@ -112,7 +112,7 @@ public class SupplierMenu {
                 }
 
                 case 4->{
-                    SupplierManager.viewSuppliers();
+                    SupplierManager.showSupplierList();
 
                     System.out.print("Enter Supplier ID: ");
                     int deleteId = Integer.parseInt(scanner.nextLine());

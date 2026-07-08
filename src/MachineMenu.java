@@ -76,7 +76,7 @@ public class MachineMenu {
 
                 case 3 -> {
 
-                    MachineManager.viewMachines();
+                    MachineManager.showMachineList();
 
                     System.out.print("Enter Machine ID: ");
                     int machineId = Integer.parseInt(scanner.nextLine());
@@ -112,7 +112,7 @@ public class MachineMenu {
                             machineType,
                             dailyCapacity,
                             capacityUnit,
-                            "ACTIVE",
+                            "AVAILABLE",
                             purchaseDate,
                             lastServiceDate
                     );
@@ -123,7 +123,7 @@ public class MachineMenu {
 
                 case 4 -> {
 
-                    MachineManager.viewMachines();
+                    MachineManager.showMachineList();
 
                     System.out.print("Enter Machine ID: ");
                     int machineId = Integer.parseInt(scanner.nextLine());

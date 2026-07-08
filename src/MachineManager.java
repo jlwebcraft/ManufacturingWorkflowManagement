@@ -6,9 +6,14 @@ public class MachineManager {
 
         String sql = """
                 INSERT INTO machines
-                (machine_name, machine_type, daily_capacity,
-                 capacity_unit, purchase_date, last_service_date)
-                VALUES (?, ?, ?, ?, ?, ?)
+                (machine_name,
+                 machine_type,
+                 daily_capacity,
+                 capacity_unit,
+                 purchase_date,
+                 last_service_date,
+                 status)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
 
         try (
@@ -23,6 +28,7 @@ public class MachineManager {
             preparedStatement.setString(4, machine.getCapacityUnit());
             preparedStatement.setDate(5, Date.valueOf(machine.getPurchaseDate()));
             preparedStatement.setDate(6, Date.valueOf(machine.getLastServiceDate()));
+            preparedStatement.setString(7, "AVAILABLE");
 
             int rows = preparedStatement.executeUpdate();
 
@@ -44,52 +50,63 @@ public class MachineManager {
     public static void viewMachines() {
 
         String sql = """
-            SELECT machine_id,
-                   machine_name,
-                   machine_type,
-                   daily_capacity,
-                   capacity_unit,
-                   purchase_date,
-                   last_service_date,
-                   status
-            FROM machines
-            WHERE status = 'ACTIVE'
-            ORDER BY machine_id
-            """;
+        SELECT machine_id,
+               machine_name,
+               machine_type,
+               daily_capacity,
+               capacity_unit,
+               purchase_date,
+               last_service_date,
+               status
+        FROM machines
+        WHERE status = 'AVAILABLE'
+        ORDER BY machine_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery()
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
         ) {
 
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tAVAILABLE MACHINES");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMachine\t\tType\tCapacity\tStatus");
-            System.out.println("----------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tAVAILABLE MACHINES");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("machine_id") + "\t"
-                                + resultSet.getString("machine_name") + "\t"
-                                + resultSet.getString("machine_type") + "\t"
-                                + resultSet.getInt("daily_capacity") + " "
-                                + resultSet.getString("capacity_unit") + "\t"
-                                + resultSet.getString("status"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Machine ID        : "
+                        + resultSet.getInt("machine_id"));
+                System.out.println("Machine Name      : "
+                        + resultSet.getString("machine_name"));
+                System.out.println("Machine Type      : "
+                        + resultSet.getString("machine_type"));
+                System.out.println("Daily Capacity    : "
+                        + resultSet.getInt("daily_capacity")
+                        + " "
+                        + resultSet.getString("capacity_unit"));
+                System.out.println("Purchase Date     : "
+                        + resultSet.getDate("purchase_date"));
+                System.out.println("Last Service Date : "
+                        + resultSet.getDate("last_service_date"));
+                System.out.println("Status            : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No machines found.");
 
             }
@@ -225,17 +242,19 @@ public class MachineManager {
     public static void searchMachine(String keyword) {
 
         String sql = """
-            SELECT machine_id,
-                   machine_name,
-                   machine_type,
-                   daily_capacity,
-                   capacity_unit,
-                   status
-            FROM machines
-            WHERE machine_name LIKE ?
-            AND status = 'ACTIVE'
-            ORDER BY machine_name
-            """;
+        SELECT machine_id,
+               machine_name,
+               machine_type,
+               daily_capacity,
+               capacity_unit,
+               purchase_date,
+               last_service_date,
+               status
+        FROM machines
+        WHERE machine_name LIKE ?
+        AND status = 'AVAILABLE'
+        ORDER BY machine_name
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -250,24 +269,33 @@ public class MachineManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMachine\t\tType\tCapacity");
-            System.out.println("------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("machine_id") + "\t"
-                                + resultSet.getString("machine_name") + "\t"
-                                + resultSet.getString("machine_type") + "\t"
-                                + resultSet.getInt("daily_capacity") + " "
-                                + resultSet.getString("capacity_unit"));
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Machine ID        : "
+                        + resultSet.getInt("machine_id"));
+                System.out.println("Machine Name      : "
+                        + resultSet.getString("machine_name"));
+                System.out.println("Machine Type      : "
+                        + resultSet.getString("machine_type"));
+                System.out.println("Daily Capacity    : "
+                        + resultSet.getInt("daily_capacity")
+                        + " "
+                        + resultSet.getString("capacity_unit"));
+                System.out.println("Purchase Date     : "
+                        + resultSet.getDate("purchase_date"));
+                System.out.println("Last Service Date : "
+                        + resultSet.getDate("last_service_date"));
+                System.out.println("Status            : "
+                        + resultSet.getString("status"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -276,6 +304,8 @@ public class MachineManager {
                 System.out.println("No matching machine found.");
 
             }
+
+            resultSet.close();
 
         } catch (SQLException e) {
 
@@ -289,12 +319,12 @@ public class MachineManager {
     public static void showMachineList() {
 
         String sql = """
-            SELECT machine_id,
-                   machine_name
-            FROM machines
-            WHERE status = 'ACTIVE'
-            ORDER BY machine_id
-            """;
+        SELECT machine_id,
+               machine_name
+        FROM machines
+        WHERE status = 'AVAILABLE'
+        ORDER BY machine_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -310,14 +340,14 @@ public class MachineManager {
             System.out.println("==========================================");
             System.out.println();
 
-            System.out.println("ID\tMachine");
-            System.out.println("------------------------------");
+            System.out.println("ID\tMachine Name");
+            System.out.println("------------------------------------------");
 
             while (resultSet.next()) {
 
                 System.out.println(
-                        resultSet.getInt("machine_id")
-                                + "\t"
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("machine_id")), 5)
                                 + resultSet.getString("machine_name"));
 
             }

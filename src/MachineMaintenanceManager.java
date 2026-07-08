@@ -54,19 +54,20 @@ public class MachineMaintenanceManager {
     public static void viewMaintenanceHistory() {
 
         String sql = """
-                SELECT
-                    mm.maintenance_id,
-                    m.machine_name,
-                    mm.maintenance_date,
-                    mm.maintenance_type,
-                    mm.technician,
-                    mm.cost,
-                    mm.next_service_date
-                FROM machine_maintenance mm
-                INNER JOIN machines m
-                    ON mm.machine_id = m.machine_id
-                ORDER BY mm.maintenance_date DESC
-                """;
+            SELECT
+                mm.maintenance_id,
+                m.machine_name,
+                mm.maintenance_date,
+                mm.maintenance_type,
+                mm.technician,
+                mm.cost,
+                mm.remarks,
+                mm.next_service_date
+            FROM machine_maintenance mm
+            INNER JOIN machines m
+                ON mm.machine_id = m.machine_id
+            ORDER BY mm.maintenance_date DESC
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -79,29 +80,39 @@ public class MachineMaintenanceManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tMAINTENANCE HISTORY");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMachine\t\tDate\t\tType");
-            System.out.println("-------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tMAINTENANCE HISTORY");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("maintenance_id") + "\t"
-                                + resultSet.getString("machine_name") + "\t"
-                                + resultSet.getString("maintenance_date") + "\t"
-                                + resultSet.getString("maintenance_type")
-                );
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Maintenance ID : "
+                        + resultSet.getInt("maintenance_id"));
+                System.out.println("Machine        : "
+                        + resultSet.getString("machine_name"));
+                System.out.println("Date           : "
+                        + resultSet.getString("maintenance_date"));
+                System.out.println("Type           : "
+                        + resultSet.getString("maintenance_type"));
+                System.out.println("Technician     : "
+                        + resultSet.getString("technician"));
+                System.out.println("Cost           : ₹"
+                        + String.format("%,.2f", resultSet.getDouble("cost")));
+                System.out.println("Remarks        : "
+                        + resultSet.getString("remarks"));
+                System.out.println("Next Service   : "
+                        + resultSet.getString("next_service_date"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No maintenance records found.");
 
             }
@@ -118,21 +129,21 @@ public class MachineMaintenanceManager {
     public static void searchMaintenanceHistory(int machineId) {
 
         String sql = """
-                SELECT
-                    mm.maintenance_id,
-                    m.machine_name,
-                    mm.maintenance_date,
-                    mm.maintenance_type,
-                    mm.technician,
-                    mm.cost,
-                    mm.remarks,
-                    mm.next_service_date
-                FROM machine_maintenance mm
-                INNER JOIN machines m
-                    ON mm.machine_id = m.machine_id
-                WHERE mm.machine_id = ?
-                ORDER BY mm.maintenance_date DESC
-                """;
+            SELECT
+                mm.maintenance_id,
+                m.machine_name,
+                mm.maintenance_date,
+                mm.maintenance_type,
+                mm.technician,
+                mm.cost,
+                mm.remarks,
+                mm.next_service_date
+            FROM machine_maintenance mm
+            INNER JOIN machines m
+                ON mm.machine_id = m.machine_id
+            WHERE mm.machine_id = ?
+            ORDER BY mm.maintenance_date DESC
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -147,39 +158,33 @@ public class MachineMaintenanceManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println("------------------------------------------");
+                System.out.println();
+                System.out.println("--------------------------------------------------");
                 System.out.println("Maintenance ID : "
                         + resultSet.getInt("maintenance_id"));
-
                 System.out.println("Machine        : "
                         + resultSet.getString("machine_name"));
-
                 System.out.println("Date           : "
                         + resultSet.getString("maintenance_date"));
-
                 System.out.println("Type           : "
                         + resultSet.getString("maintenance_type"));
-
                 System.out.println("Technician     : "
                         + resultSet.getString("technician"));
-
-                System.out.println("Cost           : "
-                        + resultSet.getDouble("cost"));
-
+                System.out.println("Cost           : ₹"
+                        + String.format("%,.2f", resultSet.getDouble("cost")));
                 System.out.println("Remarks        : "
                         + resultSet.getString("remarks"));
-
                 System.out.println("Next Service   : "
                         + resultSet.getString("next_service_date"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -194,6 +199,53 @@ public class MachineMaintenanceManager {
         } catch (SQLException e) {
 
             System.out.println("Unable to search maintenance history.");
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public static void showMaintenanceList() {
+
+        String sql = """
+            SELECT
+                maintenance_id,
+                maintenance_date
+            FROM machine_maintenance
+            ORDER BY maintenance_date DESC
+            """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
+        ) {
+
+            System.out.println();
+            System.out.println("==========================================");
+            System.out.println("\tMAINTENANCE RECORDS");
+            System.out.println("==========================================");
+            System.out.println();
+
+            System.out.println("ID\tMaintenance Date");
+            System.out.println("------------------------------------------");
+
+            while (resultSet.next()) {
+
+                System.out.println(
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("maintenance_id")), 5)
+                                + resultSet.getString("maintenance_date"));
+
+            }
+
+            System.out.println();
+
+        } catch (SQLException e) {
+
+            System.out.println("Unable to load maintenance records.");
             e.printStackTrace();
 
         }

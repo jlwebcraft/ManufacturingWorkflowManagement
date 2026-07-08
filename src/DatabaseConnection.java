@@ -1,6 +1,7 @@
 import java.sql.*;
 
-public class DatabaseConnection {
+public class DatabaseConnection
+{
 
     private static final String SERVER_URL = "jdbc:mysql://localhost:3306/";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/manufacturing_workflow_db";

@@ -325,24 +325,24 @@ public class ProductionOrderManager {
     public static void viewProductionOrders() {
 
         String sql = """
-            SELECT
-                po.order_id,
-                po.order_number,
-                p.product_name,
-                po.quantity,
-                m.machine_name,
-                u.name,
-                po.status,
-                po.created_at
-            FROM production_orders po
-            INNER JOIN products p
-                ON po.product_id = p.product_id
-            INNER JOIN machines m
-                ON po.machine_id = m.machine_id
-            INNER JOIN users u
-                ON po.created_by = u.user_id
-            ORDER BY po.order_id
-            """;
+        SELECT
+            po.order_id,
+            po.order_number,
+            p.product_name,
+            po.quantity,
+            m.machine_name,
+            u.name,
+            po.status,
+            po.created_at
+        FROM production_orders po
+        INNER JOIN products p
+            ON po.product_id = p.product_id
+        INNER JOIN machines m
+            ON po.machine_id = m.machine_id
+        INNER JOIN users u
+            ON po.created_by = u.user_id
+        ORDER BY po.order_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -355,30 +355,31 @@ public class ProductionOrderManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tPRODUCTION ORDERS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tOrder No.\t\tProduct\tQty\tStatus");
-            System.out.println("--------------------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tPRODUCTION ORDERS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("order_id") + "\t"
-                                + resultSet.getString("order_number") + "\t"
-                                + resultSet.getString("product_name") + "\t"
-                                + resultSet.getInt("quantity") + "\t"
-                                + resultSet.getString("status")
-                );
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Order ID        : " + resultSet.getInt("order_id"));
+                System.out.println("Order Number    : " + resultSet.getString("order_number"));
+                System.out.println("Product         : " + resultSet.getString("product_name"));
+                System.out.println("Quantity        : " + resultSet.getInt("quantity"));
+                System.out.println("Machine         : " + resultSet.getString("machine_name"));
+                System.out.println("Created By      : " + resultSet.getString("name"));
+                System.out.println("Status          : " + resultSet.getString("status"));
+                System.out.println("Created At      : " + resultSet.getTimestamp("created_at"));
+                System.out.println("--------------------------------------------------");
 
             }
 
             if (!found) {
 
+                System.out.println();
                 System.out.println("No production orders found.");
 
             }
@@ -687,25 +688,25 @@ public class ProductionOrderManager {
     public static void searchProductionOrder(String keyword) {
 
         String sql = """
-            SELECT
-                po.order_id,
-                po.order_number,
-                p.product_name,
-                po.quantity,
-                m.machine_name,
-                u.name,
-                po.status,
-                po.created_at
-            FROM production_orders po
-            INNER JOIN products p
-                ON po.product_id = p.product_id
-            INNER JOIN machines m
-                ON po.machine_id = m.machine_id
-            INNER JOIN users u
-                ON po.created_by = u.user_id
-            WHERE po.order_number LIKE ?
-            ORDER BY po.order_id
-            """;
+        SELECT
+            po.order_id,
+            po.order_number,
+            p.product_name,
+            po.quantity,
+            m.machine_name,
+            u.name,
+            po.status,
+            po.created_at
+        FROM production_orders po
+        INNER JOIN products p
+            ON po.product_id = p.product_id
+        INNER JOIN machines m
+            ON po.machine_id = m.machine_id
+        INNER JOIN users u
+            ON po.created_by = u.user_id
+        WHERE po.order_number LIKE ?
+        ORDER BY po.order_id
+        """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
@@ -720,25 +721,25 @@ public class ProductionOrderManager {
             boolean found = false;
 
             System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tSEARCH RESULTS");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tOrder No.\t\tProduct\tQty\tStatus");
-            System.out.println("--------------------------------------------------------------------------");
+            System.out.println("==================================================");
+            System.out.println("\t\tSEARCH RESULTS");
+            System.out.println("==================================================");
 
             while (resultSet.next()) {
 
                 found = true;
 
-                System.out.println(
-                        resultSet.getInt("order_id") + "\t"
-                                + resultSet.getString("order_number") + "\t"
-                                + resultSet.getString("product_name") + "\t"
-                                + resultSet.getInt("quantity") + "\t"
-                                + resultSet.getString("status")
-                );
+                System.out.println();
+                System.out.println("--------------------------------------------------");
+                System.out.println("Order ID        : " + resultSet.getInt("order_id"));
+                System.out.println("Order Number    : " + resultSet.getString("order_number"));
+                System.out.println("Product         : " + resultSet.getString("product_name"));
+                System.out.println("Quantity        : " + resultSet.getInt("quantity"));
+                System.out.println("Machine         : " + resultSet.getString("machine_name"));
+                System.out.println("Created By      : " + resultSet.getString("name"));
+                System.out.println("Status          : " + resultSet.getString("status"));
+                System.out.println("Created At      : " + resultSet.getTimestamp("created_at"));
+                System.out.println("--------------------------------------------------");
 
             }
 
@@ -753,6 +754,52 @@ public class ProductionOrderManager {
         } catch (SQLException e) {
 
             System.out.println("Unable to search production order.");
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public static void showProductionOrderList() {
+
+        String sql = """
+        SELECT order_id,
+               order_number
+        FROM production_orders
+        ORDER BY order_id
+        """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
+        ) {
+
+            System.out.println();
+            System.out.println("==========================================");
+            System.out.println("\tPRODUCTION ORDERS");
+            System.out.println("==========================================");
+            System.out.println();
+
+            System.out.println("ID\tOrder Number");
+            System.out.println("------------------------------------------");
+
+            while (resultSet.next()) {
+
+                System.out.println(
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("order_id")), 5)
+                                + resultSet.getString("order_number"));
+
+            }
+
+            System.out.println();
+
+        } catch (SQLException e) {
+
+            System.out.println("Unable to load production orders.");
             e.printStackTrace();
 
         }

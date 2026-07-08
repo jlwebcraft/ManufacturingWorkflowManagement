@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.*;
 
 public class ProductManager {
 
@@ -43,7 +44,17 @@ public class ProductManager {
 
     public static void viewProducts() {
 
-        String sql = """
+        final int PAGE_SIZE = 10;
+
+        Scanner scanner = new Scanner(System.in);
+
+        String countSql = """
+            SELECT COUNT(*)
+            FROM products
+            WHERE status = 'ACTIVE'
+            """;
+
+        String dataSql = """
             SELECT p.product_id,
                    c.category_name,
                    p.product_name,
@@ -56,41 +67,156 @@ public class ProductManager {
             ON p.category_id = c.category_id
             WHERE p.status = 'ACTIVE'
             ORDER BY p.product_id
+            LIMIT ? OFFSET ?
             """;
 
         try (
-                Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery()
+                Connection connection = DatabaseConnection.connectDatabase()
         ) {
 
-            System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tAVAILABLE PRODUCTS");
-            System.out.println("==========================================");
-            System.out.println();
+            int totalProducts = 0;
 
-            System.out.println("ID\tCategory\tProduct\t\tPrice\tStatus");
-            System.out.println("--------------------------------------------------------------");
+            try (
+                    PreparedStatement countStatement =
+                            connection.prepareStatement(countSql);
+                    ResultSet countResult =
+                            countStatement.executeQuery()
+            ) {
 
-            boolean found = false;
+                if (countResult.next()) {
 
-            while (resultSet.next()) {
+                    totalProducts = countResult.getInt(1);
 
-                found = true;
-
-                System.out.println(
-                        resultSet.getInt("product_id") + "\t"
-                                + resultSet.getString("category_name") + "\t"
-                                + resultSet.getString("product_name") + "\t"
-                                + resultSet.getDouble("selling_price") + "\t"
-                                + resultSet.getString("status"));
+                }
 
             }
 
-            if (!found) {
+            if (totalProducts == 0) {
 
+                System.out.println();
                 System.out.println("No products found.");
+                return;
+
+            }
+
+            int totalPages = (int) Math.ceil((double) totalProducts / PAGE_SIZE);
+
+            int currentPage = 1;
+
+            while (true) {
+
+                int offset = (currentPage - 1) * PAGE_SIZE;
+
+                try (
+                        PreparedStatement preparedStatement =
+                                connection.prepareStatement(dataSql)
+                ) {
+
+                    preparedStatement.setInt(1, PAGE_SIZE);
+                    preparedStatement.setInt(2, offset);
+
+                    try (
+                            ResultSet resultSet =
+                                    preparedStatement.executeQuery()
+                    ) {
+
+                        System.out.println();
+                        System.out.println("==================================================");
+                        System.out.println("\t\tAVAILABLE PRODUCTS");
+                        System.out.println("\t\tPage "
+                                + currentPage
+                                + " of "
+                                + totalPages);
+                        System.out.println("==================================================");
+
+                        while (resultSet.next()) {
+
+                            System.out.println();
+                            System.out.println("--------------------------------------------------");
+                            System.out.println("Product ID      : "
+                                    + resultSet.getInt("product_id"));
+
+                            System.out.println("Category        : "
+                                    + resultSet.getString("category_name"));
+
+                            System.out.println("Product Name    : "
+                                    + resultSet.getString("product_name"));
+
+                            System.out.println("Description     : "
+                                    + resultSet.getString("description"));
+
+                            System.out.println("Production Time : "
+                                    + resultSet.getInt("estimated_production_hours")
+                                    + " Hours");
+
+                            System.out.println("Selling Price   : "
+                                    + String.format("₹%,.2f",
+                                    resultSet.getDouble("selling_price")));
+
+                            System.out.println("Status          : "
+                                    + resultSet.getString("status"));
+
+                            System.out.println("--------------------------------------------------");
+
+                        }
+
+                    }
+
+                }
+
+                System.out.println();
+                System.out.println("==================================================");
+
+                if (currentPage > 1) {
+
+                    System.out.print("[P] Previous  ");
+
+                }
+
+                if (currentPage < totalPages) {
+
+                    System.out.print("[N] Next  ");
+
+                }
+
+                System.out.print("[Q] Back");
+
+                System.out.println();
+                System.out.print("Choice: ");
+
+                String choice = scanner.nextLine().trim().toUpperCase();
+
+                switch (choice) {
+
+                    case "N":
+
+                        if (currentPage < totalPages) {
+
+                            currentPage++;
+
+                        }
+
+                        break;
+
+                    case "P":
+
+                        if (currentPage > 1) {
+
+                            currentPage--;
+
+                        }
+
+                        break;
+
+                    case "Q":
+
+                        return;
+
+                    default:
+
+                        System.out.println("Invalid Choice.");
+
+                }
 
             }
 
@@ -253,19 +379,26 @@ public class ProductManager {
             System.out.println("==========================================");
             System.out.println();
 
-            System.out.println("ID\tCategory\tProduct\t\tPrice\tStatus");
-            System.out.println("--------------------------------------------------------------");
+            System.out.println(
+                    ConsoleFormatter.padRight("ID", 5)
+                            + ConsoleFormatter.padRight("Category", 28)
+                            + ConsoleFormatter.padRight("Product", 40)
+                            + ConsoleFormatter.padRight("Price", 12)
+                            + "Status"
+            );
+            System.out.println("-----------------------------------------------------------------------------------------------");
 
             while (resultSet.next()) {
 
                 found = true;
 
                 System.out.println(
-                        resultSet.getInt("product_id") + "\t"
-                                + resultSet.getString("category_name") + "\t"
-                                + resultSet.getString("product_name") + "\t"
-                                + resultSet.getDouble("selling_price") + "\t"
-                                + resultSet.getString("status"));
+                        ConsoleFormatter.padRight(String.valueOf(resultSet.getInt("product_id")), 5)
+                                + ConsoleFormatter.padRight(resultSet.getString("category_name"), 28)
+                                + ConsoleFormatter.padRight(resultSet.getString("product_name"), 40)
+                                + ConsoleFormatter.padRight(String.valueOf(resultSet.getDouble("selling_price")), 15)
+                                + resultSet.getString("status")
+                );
 
             }
 

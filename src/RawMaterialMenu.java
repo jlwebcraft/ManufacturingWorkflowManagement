@@ -76,7 +76,7 @@ public class RawMaterialMenu {
                 }
                 case 3 -> {
 
-                    RawMaterialManager.viewRawMaterials();
+                    RawMaterialManager.showRawMaterialList();
 
                     SupplierManager.showSupplierList();
 
@@ -122,7 +122,7 @@ public class RawMaterialMenu {
 
                 }
                 case 4 -> {
-                    RawMaterialManager.viewRawMaterials();
+                    RawMaterialManager.showRawMaterialList();
 
                     System.out.print("Enter Material ID: ");
                     int materialId = Integer.parseInt(scanner.nextLine());
