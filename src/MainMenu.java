@@ -22,7 +22,8 @@ public class MainMenu {
             System.out.println("7. Machines");
             System.out.println("8. Production Orders");
             System.out.println("9. Machine Maintenance");
-            System.out.println("10. Reports");
+            System.out.println("10. Production Queue");
+            System.out.println("11. Reports");
             System.out.println("0. Logout");
             System.out.println();
 
@@ -80,6 +81,10 @@ public class MainMenu {
                 }
 
                 case 10 -> {
+                    ProductionQueueMenu.showMenu();
+                }
+
+                case 11 -> {
                     ReportMenu.showMenu();
                 }
 

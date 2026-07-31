@@ -6,6 +6,7 @@ public class ProductionOrder {
     private int quantity;
     private int machineId;
     private int createdBy;
+    private String priority;
     private String status;
 
     public ProductionOrder() {
@@ -14,12 +15,14 @@ public class ProductionOrder {
     public ProductionOrder(int productId,
                            int quantity,
                            int machineId,
-                           int createdBy) {
+                           int createdBy,
+                           String priority) {
 
         this.productId = productId;
         this.quantity = quantity;
         this.machineId = machineId;
         this.createdBy = createdBy;
+        this.priority = priority;
 
     }
 
@@ -29,6 +32,7 @@ public class ProductionOrder {
                            int quantity,
                            int machineId,
                            int createdBy,
+                           String priority,
                            String status) {
 
         this.orderId = orderId;
@@ -37,6 +41,7 @@ public class ProductionOrder {
         this.quantity = quantity;
         this.machineId = machineId;
         this.createdBy = createdBy;
+        this.priority = priority;
         this.status = status;
 
     }
@@ -87,6 +92,14 @@ public class ProductionOrder {
 
     public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public String getStatus() {

@@ -1,0 +1,333 @@
+==================================================
+MANUFACTURING WORKFLOW MANAGEMENT SYSTEM
+MONTHLY REPORT
+==================================================
+Month : February 2026
+
+============== INVENTORY REPORT ==============
+
+Material : Aluminium Frame Section
+Current Stock : 260.0 Meter
+Minimum Stock : 60.0
+Maximum Stock : 450.0
+----------------------------------------------
+Material : Cabinet Hinges
+Current Stock : 180.0 Pair
+Minimum Stock : 40.0
+Maximum Stock : 300.0
+----------------------------------------------
+Material : Cable Grommets
+Current Stock : 500.0 Piece
+Minimum Stock : 120.0
+Maximum Stock : 900.0
+----------------------------------------------
+Material : Cam Lock Connectors
+Current Stock : 950.0 Set
+Minimum Stock : 250.0
+Maximum Stock : 1800.0
+----------------------------------------------
+Material : Caster Wheels (Nylon)
+Current Stock : 120.0 Set of 5
+Minimum Stock : 25.0
+Maximum Stock : 200.0
+----------------------------------------------
+Material : Edge Banding Tape (2mm)
+Current Stock : 1200.0 Meter
+Minimum Stock : 300.0
+Maximum Stock : 2000.0
+----------------------------------------------
+Material : Glass Top (8mm Toughened)
+Current Stock : 60.0 Sq. Meter
+Minimum Stock : 10.0
+Maximum Stock : 100.0
+----------------------------------------------
+Material : High-Density Foam (50mm)
+Current Stock : 210.0 Sq. Meter
+Minimum Stock : 50.0
+Maximum Stock : 350.0
+----------------------------------------------
+Material : Hydraulic Gas Lift
+Current Stock : 90.0 Piece
+Minimum Stock : 20.0
+Maximum Stock : 150.0
+----------------------------------------------
+Material : L-Angle Brackets
+Current Stock : 1500.0 Piece
+Minimum Stock : 400.0
+Maximum Stock : 2500.0
+----------------------------------------------
+Material : M8 Bolts & Nuts
+Current Stock : 850.0 Set
+Minimum Stock : 200.0
+Maximum Stock : 1500.0
+----------------------------------------------
+Material : MDF Board (12mm)
+Current Stock : 160.0 Sheet
+Minimum Stock : 35.0
+Maximum Stock : 250.0
+----------------------------------------------
+Material : Melamine Facing Paper
+Current Stock : 850.0 Sq. Meter
+Minimum Stock : 200.0
+Maximum Stock : 1400.0
+----------------------------------------------
+Material : Mesh Fabric (Breathable)
+Current Stock : 300.0 Meter
+Minimum Stock : 75.0
+Maximum Stock : 500.0
+----------------------------------------------
+Material : Plastic Granules (PP)
+Current Stock : 750.0 Kg
+Minimum Stock : 200.0
+Maximum Stock : 1200.0
+----------------------------------------------
+Material : Plywood Sheet (18mm)
+Current Stock : 180.0 Sheet
+Minimum Stock : 40.0
+Maximum Stock : 300.0
+----------------------------------------------
+Material : Polyurethane Varnish
+Current Stock : 65.0 Liter
+Minimum Stock : 15.0
+Maximum Stock : 100.0
+----------------------------------------------
+Material : PU Leather (Black)
+Current Stock : 260.0 Meter
+Minimum Stock : 60.0
+Maximum Stock : 450.0
+----------------------------------------------
+Material : Stainless Steel Handles
+Current Stock : 450.0 Piece
+Minimum Stock : 100.0
+Maximum Stock : 700.0
+----------------------------------------------
+Material : Steel Pipe (Round 2-inch)
+Current Stock : 520.0 Meter
+Minimum Stock : 120.0
+Maximum Stock : 900.0
+----------------------------------------------
+Material : Steel Square Tube (25x25mm)
+Current Stock : 480.0 Meter
+Minimum Stock : 100.0
+Maximum Stock : 800.0
+----------------------------------------------
+Material : Telescopic Drawer Slides
+Current Stock : 140.0 Pair
+Minimum Stock : 30.0
+Maximum Stock : 250.0
+----------------------------------------------
+Material : Wood Glue (D3)
+Current Stock : 180.0 Kg
+Minimum Stock : 40.0
+Maximum Stock : 300.0
+----------------------------------------------
+Material : Wood Screws (1.5 inch)
+Current Stock : 95.0 Box (100 pcs)
+Minimum Stock : 20.0
+Maximum Stock : 150.0
+----------------------------------------------
+Material : Wood Stain (Walnut)
+Current Stock : 75.0 Liter
+Minimum Stock : 15.0
+Maximum Stock : 120.0
+----------------------------------------------
+
+============== LOW STOCK REPORT ==============
+
+
+=========== PRODUCTION ORDERS ===========
+
+Order : PO-20260710-020
+Product : Mobile Pedestal 3-Drawer
+Quantity : 20
+Status : 
+----------------------------------------------
+Order : PO-20260710-019
+Product : Compact Home Office Desk
+Quantity : 50
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260709-018
+Product : Modular Study Cubicle
+Quantity : 15
+Status : CANCELLED
+----------------------------------------------
+Order : PO-20260709-017
+Product : Library Reading Table 4-Seater
+Quantity : 20
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260708-016
+Product : Student Study Desk
+Quantity : 60
+Status : 
+----------------------------------------------
+Order : PO-20260708-015
+Product : Stackable Plastic Cafe Chair
+Quantity : 80
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260707-014
+Product : Cafeteria Dining Table
+Quantity : 30
+Status : 
+----------------------------------------------
+Order : PO-20260707-013
+Product : 3-Seater Waiting Lounge Sofa
+Quantity : 25
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260706-012
+Product : Curved Reception Desk
+Quantity : 10
+Status : 
+----------------------------------------------
+Order : PO-20260706-011
+Product : Height-Adjustable Standing Desk
+Quantity : 20
+Status : CANCELLED
+----------------------------------------------
+Order : PO-20260705-009
+Product : Boat-Shaped Boardroom Table
+Quantity : 10
+Status : 
+----------------------------------------------
+Order : PO-20260705-010
+Product : 4-Person Linear Workstation
+Quantity : 18
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260704-007
+Product : 10-Seater Conference Table
+Quantity : 12
+Status : 
+----------------------------------------------
+Order : PO-20260704-008
+Product : Round Discussion Table
+Quantity : 35
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260703-006
+Product : Wooden Bookshelf 6-Tier
+Quantity : 25
+Status : 
+----------------------------------------------
+Order : PO-20260703-005
+Product : 4-Drawer Steel Filing Cabinet
+Quantity : 40
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260702-003
+Product : Director Mahogany Desk
+Quantity : 20
+Status : 
+----------------------------------------------
+Order : PO-20260702-004
+Product : L-Shaped Executive Workstation
+Quantity : 15
+Status : COMPLETED
+----------------------------------------------
+Order : PO-20260701-002
+Product : Executive Leather Armchair
+Quantity : 50
+Status : 
+----------------------------------------------
+Order : PO-20260701-001
+Product : Ergonomic Mesh Chair
+Quantity : 100
+Status : COMPLETED
+----------------------------------------------
+
+========= MACHINE MAINTENANCE =========
+
+Machine : Upholstery Assembly Station
+Date : 2026-06-30
+Type : Inspection
+Technician : Prakash Mehta
+Cost : ₹3500.0
+----------------------------------------------
+Machine : CNC Vertical Machining Center
+Date : 2026-06-27
+Type : Preventive
+Technician : Suresh Patel
+Cost : ₹13800.0
+----------------------------------------------
+Machine : Multi-Spindle Drilling Machine
+Date : 2026-06-25
+Type : Preventive
+Technician : Nitin Desai
+Cost : ₹6800.0
+----------------------------------------------
+Machine : Laser Engraving Machine
+Date : 2026-06-22
+Type : Preventive
+Technician : Deepak Sharma
+Cost : ₹8100.0
+----------------------------------------------
+Machine : Edge Banding Machine EB-450
+Date : 2026-06-20
+Type : Preventive
+Technician : Mahesh Shah
+Cost : ₹8500.0
+----------------------------------------------
+Machine : Automatic Spray Paint Booth
+Date : 2026-06-18
+Type : Preventive
+Technician : Kiran Joshi
+Cost : ₹9200.0
+----------------------------------------------
+Machine : CNC Router 1325
+Date : 2026-06-15
+Type : Preventive
+Technician : Rakesh Patel
+Cost : ₹12000.0
+----------------------------------------------
+Machine : PVC Edge Trimming Machine
+Date : 2026-06-12
+Type : Corrective
+Technician : Rahul Panchal
+Cost : ₹15800.0
+----------------------------------------------
+Machine : Hydraulic Cold Press HP-100
+Date : 2026-06-10
+Type : Preventive
+Technician : Sanjay Verma
+Cost : ₹7600.0
+----------------------------------------------
+Machine : Sliding Panel Saw SP-3200
+Date : 2026-05-28
+Type : Corrective
+Technician : Amit Kulkarni
+Cost : ₹14500.0
+----------------------------------------------
+Machine : Laser Engraving Machine
+Date : 2026-03-25
+Type : Inspection
+Technician : Deepak Sharma
+Cost : ₹3900.0
+----------------------------------------------
+Machine : Automatic Spray Paint Booth
+Date : 2026-03-21
+Type : Corrective
+Technician : Kiran Joshi
+Cost : ₹11200.0
+----------------------------------------------
+Machine : CNC Router 1325
+Date : 2026-03-12
+Type : Inspection
+Technician : Rakesh Patel
+Cost : ₹4200.0
+----------------------------------------------
+Machine : PVC Edge Trimming Machine
+Date : 2026-03-10
+Type : Preventive
+Technician : Rahul Panchal
+Cost : ₹7100.0
+----------------------------------------------
+Machine : Sliding Panel Saw SP-3200
+Date : 2026-02-18
+Type : Preventive
+Technician : Amit Kulkarni
+Cost : ₹7900.0
+----------------------------------------------
+

@@ -17,6 +17,7 @@ public class ReportMenu {
             System.out.println("2. Low Stock Report");
             System.out.println("3. Production Order Report");
             System.out.println("4. Machine Maintenance Report");
+            System.out.println("5. Export Monthly Report");
             System.out.println("0. Back");
 
             System.out.print("Choice: ");
@@ -43,6 +44,36 @@ public class ReportMenu {
                 case 3 -> ReportManager.productionOrderReport();
 
                 case 4 -> ReportManager.machineMaintenanceReport();
+
+                case 5 -> {
+
+                    System.out.print("Enter Month (1-12): ");
+                    int month = Integer.parseInt(scanner.nextLine());
+
+                    if (month < 1 || month > 12) {
+
+                        System.out.println("Invalid Month.");
+                        break;
+
+                    }
+
+                    System.out.print("Enter Year: ");
+                    int year = Integer.parseInt(scanner.nextLine());
+
+                    Thread reportThread =
+                            new Thread(
+                                    new ReportExportTask(month, year)
+                            );
+
+                    reportThread.start();
+
+                    System.out.println();
+                    System.out.println("==========================================");
+                    System.out.println("Report export started in background...");
+                    System.out.println("You may continue using the system.");
+                    System.out.println("==========================================");
+
+                }
 
                 case 0 -> {
 

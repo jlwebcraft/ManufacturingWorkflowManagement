@@ -91,11 +91,52 @@ public class ProductionOrderMenu {
 
                     }
 
+                    System.out.println();
+                    System.out.println("==========================================");
+                    System.out.println("\tSELECT PRIORITY");
+                    System.out.println("==========================================");
+                    System.out.println("1. LOW");
+                    System.out.println("2. MEDIUM");
+                    System.out.println("3. HIGH");
+
+                    System.out.print("Choice: ");
+
+                    int priorityChoice = Integer.parseInt(scanner.nextLine());
+
+                    String priority = null;
+
+                    switch (priorityChoice) {
+
+                        case 1:
+                            priority = "LOW";
+                            break;
+
+                        case 2:
+                            priority = "MEDIUM";
+                            break;
+
+                        case 3:
+                            priority = "HIGH";
+                            break;
+
+                        default:
+                            System.out.println("Invalid Priority.");
+                            break;
+
+                    }
+
+                    if (priority == null) {
+
+                        break;
+
+                    }
+
                     ProductionOrder order = new ProductionOrder(
                             productId,
                             quantity,
                             machineId,
-                            userId
+                            userId,
+                            priority
                     );
 
                     ProductionOrderManager.addProductionOrder(order);
@@ -103,7 +144,9 @@ public class ProductionOrderMenu {
                 }
 
                 case 2 -> {
+
                     ProductionOrderManager.viewProductionOrders();
+
                 }
 
                 case 3 -> {
@@ -155,7 +198,9 @@ public class ProductionOrderMenu {
                     }
 
                     if (status == null) {
+
                         break;
+
                     }
 
                     ProductionOrderManager.updateOrderStatus(orderId, status);
@@ -163,6 +208,7 @@ public class ProductionOrderMenu {
                 }
 
                 case 4 -> {
+
                     ProductionOrderManager.showProductionOrderList();
 
                     System.out.print("Enter Order ID: ");
@@ -176,13 +222,16 @@ public class ProductionOrderMenu {
                     }
 
                     ProductionOrderManager.cancelProductionOrder(orderId);
+
                 }
 
                 case 5 -> {
+
                     System.out.print("Enter Order Number: ");
                     String keyword = scanner.nextLine().trim();
 
                     ProductionOrderManager.searchProductionOrder(keyword);
+
                 }
 
                 case 0 -> {

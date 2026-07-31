@@ -226,15 +226,16 @@ public class ProductionOrderManager {
         String orderNumber = generateOrderNumber();
 
         String sql = """
-            INSERT INTO production_orders
-            (order_number,
-             product_id,
-             quantity,
-             machine_id,
-             created_by,
-             status)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """;
+        INSERT INTO production_orders
+        (order_number,
+         product_id,
+         quantity,
+         machine_id,
+         created_by,
+         priority,
+         status)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        """;
 
         Connection connection = null;
 
@@ -244,19 +245,27 @@ public class ProductionOrderManager {
 
             connection.setAutoCommit(false);
 
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, orderNumber);
             preparedStatement.setInt(2, order.getProductId());
             preparedStatement.setInt(3, order.getQuantity());
             preparedStatement.setInt(4, order.getMachineId());
             preparedStatement.setInt(5, order.getCreatedBy());
-            preparedStatement.setString(6, "PENDING");
+            preparedStatement.setString(6, order.getPriority());
+            preparedStatement.setString(7, "PENDING");
 
             int rows = preparedStatement.executeUpdate();
 
             if (rows > 0) {
+
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+                if (generatedKeys.next()) {
+                    order.setOrderId(generatedKeys.getInt(1));
+                }
+
+                generatedKeys.close();
 
                 consumeMaterials(
                         connection,
@@ -267,12 +276,21 @@ public class ProductionOrderManager {
 
                 connection.commit();
 
+                order.setOrderNumber(orderNumber);
+                order.setStatus("PENDING");
+
+                ProductionQueueManager.addOrder(order);
+
                 System.out.println();
                 System.out.println("==========================================");
-                System.out.println("Production Order Created");
+                System.out.println("Production Order Created Successfully");
                 System.out.println("==========================================");
                 System.out.println("Order Number : " + orderNumber);
-                System.out.println("Status : PENDING");
+                System.out.println("Priority     : " + order.getPriority());
+                System.out.println("Status       : PENDING");
+                System.out.println("Added To Production Queue");
+                System.out.println("Current Queue Size : "
+                        + ProductionQueueManager.getQueueSize());
 
             } else {
 
@@ -332,6 +350,7 @@ public class ProductionOrderManager {
             po.quantity,
             m.machine_name,
             u.name,
+            po.priority,
             po.status,
             po.created_at
         FROM production_orders po
@@ -371,6 +390,7 @@ public class ProductionOrderManager {
                 System.out.println("Quantity        : " + resultSet.getInt("quantity"));
                 System.out.println("Machine         : " + resultSet.getString("machine_name"));
                 System.out.println("Created By      : " + resultSet.getString("name"));
+                System.out.println("Priority        : " + resultSet.getString("priority"));
                 System.out.println("Status          : " + resultSet.getString("status"));
                 System.out.println("Created At      : " + resultSet.getTimestamp("created_at"));
                 System.out.println("--------------------------------------------------");
@@ -695,6 +715,7 @@ public class ProductionOrderManager {
             po.quantity,
             m.machine_name,
             u.name,
+            po.priority,
             po.status,
             po.created_at
         FROM production_orders po
@@ -737,6 +758,7 @@ public class ProductionOrderManager {
                 System.out.println("Quantity        : " + resultSet.getInt("quantity"));
                 System.out.println("Machine         : " + resultSet.getString("machine_name"));
                 System.out.println("Created By      : " + resultSet.getString("name"));
+                System.out.println("Priority        : " + resultSet.getString("priority"));
                 System.out.println("Status          : " + resultSet.getString("status"));
                 System.out.println("Created At      : " + resultSet.getTimestamp("created_at"));
                 System.out.println("--------------------------------------------------");
