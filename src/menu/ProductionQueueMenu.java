@@ -1,6 +1,7 @@
 package menu;
 
 import manager.ProductionQueueManager;
+import model.ProductionOrder;
 
 import java.util.Scanner;
 

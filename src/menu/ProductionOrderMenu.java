@@ -4,6 +4,7 @@ import manager.ProductionOrderManager;
 import manager.ProductManager;
 import manager.MachineManager;
 import model.ProductionOrder;
+import manager.UserManager;
 
 import java.util.Scanner;
 

@@ -2,6 +2,7 @@ package manager;
 
 import reports.ReportExporter;
 import reports.ReportExportTask;
+import database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

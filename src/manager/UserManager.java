@@ -2,6 +2,7 @@ package manager;
 
 import database.DatabaseConnection;
 import model.User;
+import database.PasswordHasher;
 
 import java.sql.*;
 

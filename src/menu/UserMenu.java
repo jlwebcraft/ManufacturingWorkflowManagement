@@ -2,7 +2,7 @@ package menu;
 
 import manager.UserManager;
 import model.User;
-
+import manager.RoleManager;
 import java.util.Scanner;
 
 public class UserMenu {

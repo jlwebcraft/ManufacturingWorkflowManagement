@@ -1,6 +1,8 @@
 package thread;
 
 import manager.ProductionQueueManager;
+import model.ProductionOrder;
+import database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
