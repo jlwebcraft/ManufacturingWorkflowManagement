@@ -1,3 +1,9 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.ProductCategory;
+import util.ConsoleFormatter;
+
 import java.sql.*;
 
 public class ProductCategoryManager {

@@ -1,3 +1,5 @@
+package model;
+
 public class ProductCategory {
 
     private int categoryId;

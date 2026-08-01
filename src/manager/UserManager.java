@@ -1,3 +1,8 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.User;
+
 import java.sql.*;
 
 public class UserManager {

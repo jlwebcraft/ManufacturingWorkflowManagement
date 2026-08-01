@@ -1,3 +1,9 @@
+package menu;
+
+import manager.MachineMaintenanceManager;
+import manager.MachineManager;
+import model.MachineMaintenance;
+
 import java.util.Scanner;
 
 public class MachineMaintenanceMenu {

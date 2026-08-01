@@ -1,3 +1,9 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.ProductionOrder;
+import util.ConsoleFormatter;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

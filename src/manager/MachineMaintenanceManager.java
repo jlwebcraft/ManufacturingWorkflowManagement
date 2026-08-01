@@ -1,3 +1,9 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.MachineMaintenance;
+import util.ConsoleFormatter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

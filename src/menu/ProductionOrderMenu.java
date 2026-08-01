@@ -1,3 +1,10 @@
+package menu;
+
+import manager.ProductionOrderManager;
+import manager.ProductManager;
+import manager.MachineManager;
+import model.ProductionOrder;
+
 import java.util.Scanner;
 
 public class ProductionOrderMenu {

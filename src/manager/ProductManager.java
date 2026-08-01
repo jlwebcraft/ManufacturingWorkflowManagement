@@ -1,3 +1,9 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.Product;
+import util.ConsoleFormatter;
+
 import java.sql.*;
 import java.util.*;
 

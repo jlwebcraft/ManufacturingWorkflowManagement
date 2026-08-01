@@ -1,3 +1,8 @@
+package menu;
+
+import manager.SupplierManager;
+import model.Supplier;
+
 import java.util.Scanner;
 
 public class SupplierMenu {

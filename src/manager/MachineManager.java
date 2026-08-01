@@ -1,3 +1,9 @@
+package manager;
+
+import database.DatabaseConnection;
+import model.Machine;
+import util.ConsoleFormatter;
+
 import java.sql.*;
 
 public class MachineManager {

@@ -1,3 +1,5 @@
+package util;
+
 public class ConsoleFormatter {
 
     public static String padRight(String text, int length) {

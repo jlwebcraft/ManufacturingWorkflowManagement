@@ -1,3 +1,8 @@
+package manager;
+
+import model.ProductionOrder;
+import util.ProductionOrderComparator;
+
 import java.util.PriorityQueue;
 
 public class ProductionQueueManager {

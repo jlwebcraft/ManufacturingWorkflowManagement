@@ -1,3 +1,7 @@
+package util;
+
+import model.ProductionOrder;
+
 import java.util.Comparator;
 
 public class ProductionOrderComparator

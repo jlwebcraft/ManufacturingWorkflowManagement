@@ -1,3 +1,8 @@
+package manager;
+
+import reports.ReportExporter;
+import reports.ReportExportTask;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

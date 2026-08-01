@@ -1,3 +1,9 @@
+package menu;
+
+import manager.RawMaterialManager;
+import manager.SupplierManager;
+import model.RawMaterial;
+
 import java.util.Scanner;
 
 public class RawMaterialMenu {

@@ -1,3 +1,5 @@
+package model;
+
 public class RawMaterial {
 
     private int materialId;

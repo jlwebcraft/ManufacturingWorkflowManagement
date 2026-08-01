@@ -1,3 +1,8 @@
+package menu;
+
+import manager.UserManager;
+import model.User;
+
 import java.util.Scanner;
 
 public class UserMenu {

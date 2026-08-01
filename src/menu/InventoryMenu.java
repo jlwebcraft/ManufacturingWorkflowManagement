@@ -1,3 +1,9 @@
+package menu;
+
+import manager.InventoryManager;
+import manager.RawMaterialManager;
+import model.Inventory;
+
 import java.util.Scanner;
 
 public class InventoryMenu {

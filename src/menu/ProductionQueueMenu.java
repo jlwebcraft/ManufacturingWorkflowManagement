@@ -1,3 +1,7 @@
+package menu;
+
+import manager.ProductionQueueManager;
+
 import java.util.Scanner;
 
 public class ProductionQueueMenu {

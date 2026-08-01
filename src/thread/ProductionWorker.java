@@ -1,3 +1,7 @@
+package thread;
+
+import manager.ProductionQueueManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

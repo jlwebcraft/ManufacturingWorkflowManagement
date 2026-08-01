@@ -1,3 +1,7 @@
+package menu;
+
+import manager.ReportManager;
+
 import java.util.Scanner;
 
 public class ReportMenu {

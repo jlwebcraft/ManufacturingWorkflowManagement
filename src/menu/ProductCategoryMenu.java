@@ -1,3 +1,8 @@
+package menu;
+
+import manager.ProductCategoryManager;
+import model.ProductCategory;
+
 import java.util.Scanner;
 
 public class ProductCategoryMenu {

@@ -1,3 +1,7 @@
+package reports;
+
+import database.DatabaseConnection;
+
 import java.io.*;
 
 public class ReportExporter {
