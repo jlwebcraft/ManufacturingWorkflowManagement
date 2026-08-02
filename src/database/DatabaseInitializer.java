@@ -1,5 +1,7 @@
 package database;
 
+import util.PasswordHasher;
+
 import java.sql.*;
 
 public class DatabaseInitializer {

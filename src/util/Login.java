@@ -1,7 +1,6 @@
 package util;
 
 import database.DatabaseConnection;
-import database.PasswordHasher;
 
 import java.sql.*;
 import java.util.Scanner;
