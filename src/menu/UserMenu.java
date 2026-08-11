@@ -9,7 +9,7 @@ public class UserMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 

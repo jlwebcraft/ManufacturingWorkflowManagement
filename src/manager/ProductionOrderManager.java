@@ -148,12 +148,15 @@ public class ProductionOrderManager {
 
     }
 
-    public static void consumeMaterials(Connection connection, int productId, int orderQuantity, int userId) throws SQLException {
+    public static void consumeMaterials(Connection connection,
+                                        int orderId,
+                                        int productId,
+                                        int orderQuantity,
+                                        int userId) throws SQLException {
 
         String selectSql = """
-            SELECT
-                pm.material_id,
-                pm.quantity_required
+            SELECT pm.material_id,
+                   pm.quantity_required
             FROM product_materials pm
             WHERE pm.product_id = ?
             """;
@@ -166,67 +169,57 @@ public class ProductionOrderManager {
 
         String transactionSql = """
             INSERT INTO material_transactions
-            (material_id,
-             transaction_type,
-             quantity,
-             reason,
-             performed_by)
+            (material_id, transaction_type, quantity, reason, performed_by)
             VALUES (?, ?, ?, ?, ?)
             """;
 
-        try {
+        String usageSql = """
+            INSERT INTO production_material_usage
+            (order_id, material_id, quantity_used)
+            VALUES (?, ?, ?)
+            """;
 
-            PreparedStatement selectStatement =
-                    connection.prepareStatement(selectSql);
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectSql)) {
 
             selectStatement.setInt(1, productId);
 
-            ResultSet resultSet = selectStatement.executeQuery();
+            try (ResultSet resultSet = selectStatement.executeQuery()) {
 
-            while (resultSet.next()) {
+                while (resultSet.next()) {
 
-                int materialId =
-                        resultSet.getInt("material_id");
+                    int materialId = resultSet.getInt("material_id");
+                    double quantityRequired = resultSet.getDouble("quantity_required");
+                    double totalRequired = quantityRequired * orderQuantity;
 
-                double quantityRequired =
-                        resultSet.getDouble("quantity_required");
+                    try (PreparedStatement inventoryStatement = connection.prepareStatement(updateInventorySql);
+                         PreparedStatement transactionStatement = connection.prepareStatement(transactionSql);
+                         PreparedStatement usageStatement = connection.prepareStatement(usageSql)) {
 
-                double totalRequired =
-                        quantityRequired * orderQuantity;
+                        inventoryStatement.setDouble(1, totalRequired);
+                        inventoryStatement.setInt(2, materialId);
+                        inventoryStatement.executeUpdate();
 
-                PreparedStatement inventoryStatement =
-                        connection.prepareStatement(updateInventorySql);
+                        transactionStatement.setInt(1, materialId);
+                        transactionStatement.setString(2, "OUT");
+                        transactionStatement.setDouble(3, totalRequired);
+                        transactionStatement.setString(4, "Production Order");
+                        transactionStatement.setInt(5, userId);
+                        transactionStatement.executeUpdate();
 
-                inventoryStatement.setDouble(1, totalRequired);
-                inventoryStatement.setInt(2, materialId);
+                        usageStatement.setInt(1, orderId);
+                        usageStatement.setInt(2, materialId);
+                        usageStatement.setDouble(3, totalRequired);
+                        usageStatement.executeUpdate();
 
-                inventoryStatement.executeUpdate();
+                    }
 
-                PreparedStatement transactionStatement =
-                        connection.prepareStatement(transactionSql);
-
-                transactionStatement.setInt(1, materialId);
-                transactionStatement.setString(2, "OUT");
-                transactionStatement.setDouble(3, totalRequired);
-                transactionStatement.setString(4, "Production Order");
-                transactionStatement.setInt(5, userId);
-
-                transactionStatement.executeUpdate();
-
-                inventoryStatement.close();
-                transactionStatement.close();
+                }
 
             }
 
-            resultSet.close();
-            selectStatement.close();
-
-        } catch (SQLException e) {
-            throw e;
         }
 
     }
-
     public static void addProductionOrder(ProductionOrder order) {
 
         String orderNumber = generateOrderNumber();
@@ -235,8 +228,8 @@ public class ProductionOrderManager {
         INSERT INTO production_orders
         (order_number,
          product_id,
-         quantity,
          machine_id,
+         quantity,
          created_by,
          priority,
          status)
@@ -255,8 +248,8 @@ public class ProductionOrderManager {
 
             preparedStatement.setString(1, orderNumber);
             preparedStatement.setInt(2, order.getProductId());
-            preparedStatement.setInt(3, order.getQuantity());
-            preparedStatement.setInt(4, order.getMachineId());
+            preparedStatement.setInt(3, order.getMachineId());
+            preparedStatement.setInt(4, order.getQuantity());
             preparedStatement.setInt(5, order.getCreatedBy());
             preparedStatement.setString(6, order.getPriority());
             preparedStatement.setString(7, "PENDING");
@@ -275,6 +268,7 @@ public class ProductionOrderManager {
 
                 consumeMaterials(
                         connection,
+                        order.getOrderId(),
                         order.getProductId(),
                         order.getQuantity(),
                         order.getCreatedBy()
@@ -362,10 +356,10 @@ public class ProductionOrderManager {
         FROM production_orders po
         INNER JOIN products p
             ON po.product_id = p.product_id
-        INNER JOIN machines m
-            ON po.machine_id = m.machine_id
         INNER JOIN users u
             ON po.created_by = u.user_id
+        LEFT JOIN machines m
+            ON po.machine_id = m.machine_id
         ORDER BY po.order_id
         """;
 
@@ -455,39 +449,180 @@ public class ProductionOrderManager {
 
     public static void updateOrderStatus(int orderId, String status) {
 
-        String sql = """
-            UPDATE production_orders
-            SET status = ?
+        String selectSql = """
+            SELECT status,
+                   machine_id,
+                   created_by
+            FROM production_orders
             WHERE order_id = ?
             """;
 
-        try (
-                Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
-        ) {
+        String startSql = """
+            UPDATE production_orders
+            SET status = 'IN_PROGRESS',
+                production_start = COALESCE(production_start, NOW())
+            WHERE order_id = ?
+              AND status = 'PENDING'
+            """;
 
-            preparedStatement.setString(1, status);
-            preparedStatement.setInt(2, orderId);
+        String qualityCheckSql = """
+            UPDATE production_orders
+            SET status = 'QUALITY_CHECK',
+                completed_quantity = quantity,
+                production_end = NOW()
+            WHERE order_id = ?
+              AND status = 'IN_PROGRESS'
+            """;
 
-            int rows = preparedStatement.executeUpdate();
+        String busyMachineSql = """
+            UPDATE machines
+            SET status = 'BUSY'
+            WHERE machine_id = ?
+              AND status = 'AVAILABLE'
+            """;
 
-            if (rows > 0) {
+        String availableMachineSql = """
+            UPDATE machines
+            SET status = 'AVAILABLE'
+            WHERE machine_id = ?
+            """;
 
-                System.out.println();
-                System.out.println("Production Order Status Updated.");
-                System.out.println("New Status : " + status);
+        String historySql = """
+            INSERT INTO workflow_history
+            (order_id, previous_status, new_status, changed_by, remarks)
+            VALUES (?, ?, ?, ?, ?)
+            """;
 
-            } else {
+        Connection connection = null;
 
-                System.out.println("Invalid Order ID.");
+        try {
+
+            connection = DatabaseConnection.connectDatabase();
+            connection.setAutoCommit(false);
+
+            String currentStatus;
+            int machineId;
+            int changedBy;
+
+            try (PreparedStatement selectStatement = connection.prepareStatement(selectSql)) {
+
+                selectStatement.setInt(1, orderId);
+
+                try (ResultSet resultSet = selectStatement.executeQuery()) {
+
+                    if (!resultSet.next()) {
+                        connection.rollback();
+                        System.out.println("Invalid Order ID.");
+                        return;
+                    }
+
+                    currentStatus = resultSet.getString("status");
+                    machineId = resultSet.getInt("machine_id");
+                    changedBy = resultSet.getInt("created_by");
+
+                }
 
             }
 
+            int rows;
+
+            if (status.equals("IN_PROGRESS")) {
+
+                if (!currentStatus.equals("PENDING")) {
+                    connection.rollback();
+                    System.out.println("Only PENDING orders can be started.");
+                    return;
+                }
+
+                try (PreparedStatement machineStatement = connection.prepareStatement(busyMachineSql)) {
+                    machineStatement.setInt(1, machineId);
+                    if (machineStatement.executeUpdate() == 0) {
+                        connection.rollback();
+                        System.out.println("Assigned machine is not available.");
+                        return;
+                    }
+                }
+
+                try (PreparedStatement updateStatement = connection.prepareStatement(startSql)) {
+                    updateStatement.setInt(1, orderId);
+                    rows = updateStatement.executeUpdate();
+                }
+
+            } else if (status.equals("QUALITY_CHECK")) {
+
+                if (!currentStatus.equals("IN_PROGRESS")) {
+                    connection.rollback();
+                    System.out.println("Only IN_PROGRESS orders can be sent to quality check.");
+                    return;
+                }
+
+                try (PreparedStatement updateStatement = connection.prepareStatement(qualityCheckSql)) {
+                    updateStatement.setInt(1, orderId);
+                    rows = updateStatement.executeUpdate();
+                }
+
+                try (PreparedStatement machineStatement = connection.prepareStatement(availableMachineSql)) {
+                    machineStatement.setInt(1, machineId);
+                    machineStatement.executeUpdate();
+                }
+
+            } else {
+
+                connection.rollback();
+                System.out.println("Invalid workflow status.");
+                return;
+
+            }
+
+            if (rows == 0) {
+                connection.rollback();
+                System.out.println("Production order status was not changed.");
+                return;
+            }
+
+            try (PreparedStatement historyStatement = connection.prepareStatement(historySql)) {
+                historyStatement.setInt(1, orderId);
+                historyStatement.setString(2, currentStatus);
+                historyStatement.setString(3, status);
+                historyStatement.setInt(4, changedBy);
+                historyStatement.setString(5, "Manufacturing status updated manually.");
+                historyStatement.executeUpdate();
+            }
+
+            connection.commit();
+
+            System.out.println();
+            System.out.println("Production Order Status Updated.");
+            System.out.println("Previous Status : " + currentStatus);
+            System.out.println("New Status      : " + status);
+
         } catch (SQLException e) {
+
+            try {
+
+                if (connection != null) {
+                    connection.rollback();
+                }
+
+            } catch (SQLException rollbackException) {
+                rollbackException.printStackTrace();
+            }
 
             System.out.println("Unable to update order status.");
             e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -727,10 +862,10 @@ public class ProductionOrderManager {
         FROM production_orders po
         INNER JOIN products p
             ON po.product_id = p.product_id
-        INNER JOIN machines m
-            ON po.machine_id = m.machine_id
         INNER JOIN users u
             ON po.created_by = u.user_id
+        LEFT JOIN machines m
+            ON po.machine_id = m.machine_id
         WHERE po.order_number LIKE ?
         ORDER BY po.order_id
         """;

@@ -9,7 +9,7 @@ public class Login {
 
     public static boolean login() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         System.out.println();
         System.out.println("==============================================");
@@ -19,7 +19,7 @@ public class Login {
         System.out.print("Username (type 'exit' to quit): ");
         String username = scanner.nextLine().trim();
 
-        if (username.equalsIgnoreCase("exit")) {
+        if (username.equalsIgnoreCase("exit")||username.equalsIgnoreCase("quit")) {
             System.out.println("==========================================");
             System.out.println("Thank you for using MWMS.");
             System.out.println("Exiting...");

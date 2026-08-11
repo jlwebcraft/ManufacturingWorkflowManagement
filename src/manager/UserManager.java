@@ -2,6 +2,7 @@ package manager;
 
 import database.DatabaseConnection;
 import model.User;
+import util.ConsoleFormatter;
 import util.PasswordHasher;
 
 import java.sql.*;
@@ -38,7 +39,7 @@ public class UserManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ User added successfully.");
+                System.out.println("User added successfully.");
 
             }
 
@@ -160,7 +161,8 @@ public class UserManager {
                    u.username,
                    u.email,
                    u.phone,
-                   u.status
+                   u.status,
+                   u.created_at
             FROM users u
             INNER JOIN roles r
             ON u.role_id = r.role_id
@@ -182,19 +184,32 @@ public class UserManager {
             System.out.println("\tAVAILABLE USERS");
             System.out.println("==========================================");
             System.out.println();
-
-            System.out.println("ID\tRole\tName\tUsername");
-            System.out.println("------------------------------------------------");
+            System.out.println(
+                    ConsoleFormatter.padRight("ID", 5)
+                            + ConsoleFormatter.padRight("Role", 22)
+                            + ConsoleFormatter.padRight("Name", 25)
+                            + ConsoleFormatter.padRight("Username", 18)
+                            + ConsoleFormatter.padRight("Email", 32)
+                            + ConsoleFormatter.padRight("Phone", 16)
+                            + ConsoleFormatter.padRight("Status", 12)
+                            + "Created At"
+            );
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
             while (resultSet.next()) {
 
                 found = true;
 
                 System.out.println(
-                        resultSet.getInt("user_id") + "\t"
-                                + resultSet.getString("role_name") + "\t"
-                                + resultSet.getString("name") + "\t"
-                                + resultSet.getString("username"));
+                        ConsoleFormatter.padRight(
+                                String.valueOf(resultSet.getInt("user_id")), 5)
+                                + ConsoleFormatter.padRight(resultSet.getString("role_name"), 22)
+                                + ConsoleFormatter.padRight(resultSet.getString("name"), 25)
+                                + ConsoleFormatter.padRight(resultSet.getString("username"), 18)
+                                + ConsoleFormatter.padRight(resultSet.getString("email"), 32)
+                                + ConsoleFormatter.padRight(resultSet.getString("phone"), 16)
+                                + ConsoleFormatter.padRight(resultSet.getString("status"), 12)
+                                + resultSet.getTimestamp("created_at"));
 
             }
 
@@ -250,7 +265,7 @@ public class UserManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ User updated successfully.");
+                System.out.println("User updated successfully.");
 
             } else {
 
@@ -287,7 +302,7 @@ public class UserManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ User deleted successfully.");
+                System.out.println("User deleted successfully.");
 
             } else {
 

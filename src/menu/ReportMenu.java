@@ -9,7 +9,7 @@ public class ReportMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 
@@ -21,7 +21,7 @@ public class ReportMenu {
             System.out.println("1. Inventory Report");
             System.out.println("2. Low Stock Report");
             System.out.println("3. Production Order Report");
-            System.out.println("4. Machine Maintenance Report");
+            System.out.println("4. Finished Goods Report");
             System.out.println("5. Export Monthly Report");
             System.out.println("0. Back");
 
@@ -48,7 +48,7 @@ public class ReportMenu {
 
                 case 3 -> ReportManager.productionOrderReport();
 
-                case 4 -> ReportManager.machineMaintenanceReport();
+                case 4 -> ReportManager.finishedGoodsReport();
 
                 case 5 -> {
 

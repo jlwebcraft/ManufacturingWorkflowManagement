@@ -4,6 +4,7 @@ public class Inventory {
 
     private int inventoryId;
     private int materialId;
+    private String inventoryName;
     private double currentStock;
     private double minimumStock;
     private double maximumStock;
@@ -12,11 +13,13 @@ public class Inventory {
     }
 
     public Inventory(int materialId,
+                     String inventoryName,
                      double currentStock,
                      double minimumStock,
                      double maximumStock) {
 
         this.materialId = materialId;
+        this.inventoryName = inventoryName;
         this.currentStock = currentStock;
         this.minimumStock = minimumStock;
         this.maximumStock = maximumStock;
@@ -25,12 +28,14 @@ public class Inventory {
 
     public Inventory(int inventoryId,
                      int materialId,
+                     String inventoryName,
                      double currentStock,
                      double minimumStock,
                      double maximumStock) {
 
         this.inventoryId = inventoryId;
         this.materialId = materialId;
+        this.inventoryName = inventoryName;
         this.currentStock = currentStock;
         this.minimumStock = minimumStock;
         this.maximumStock = maximumStock;
@@ -51,6 +56,14 @@ public class Inventory {
 
     public void setMaterialId(int materialId) {
         this.materialId = materialId;
+    }
+
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
     }
 
     public double getCurrentStock() {

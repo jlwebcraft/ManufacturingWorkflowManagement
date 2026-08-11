@@ -1,7 +1,8 @@
 package menu;
 
 import manager.ProductionQueueManager;
-import model.ProductionOrder;
+import model.*;
+import manager.*;
 
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class ProductionQueueMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 
@@ -32,9 +33,7 @@ public class ProductionQueueMenu {
 
                 choice = Integer.parseInt(scanner.nextLine());
 
-            }
-
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
 
                 System.out.println("Invalid Input.");
                 continue;
@@ -43,97 +42,77 @@ public class ProductionQueueMenu {
 
             switch (choice) {
 
-                case 1 -> {
+                case 1 -> ProductionQueueManager.displayQueue();
 
-                    ProductionQueueManager.displayQueue();
+                case 2 -> processNextOrder();
 
-                }
+                case 3 -> ProductionQueueManager.clearQueue();
 
-                case 2 -> {
-
-                    if (ProductionQueueManager.isQueueEmpty()) {
-
-                        System.out.println();
-                        System.out.println("Queue is empty.");
-                        break;
-
-                    }
-
-                    ProductionOrder order =
-                            ProductionQueueManager.getNextOrder();
-
-                    System.out.println();
-                    System.out.println("==========================================");
-                    System.out.println("NEXT ORDER");
-                    System.out.println("==========================================");
-
-                    System.out.println("Order Number : "
-                            + order.getOrderNumber());
-
-                    System.out.println("Priority     : "
-                            + order.getPriority());
-
-                    System.out.println("Product ID   : "
-                            + order.getProductId());
-
-                    System.out.println("Quantity     : "
-                            + order.getQuantity());
-
-                    System.out.println("Machine ID   : "
-                            + order.getMachineId());
-
-                    System.out.println();
-                    System.out.println("Removed From Queue.");
-
-                }
-
-                case 3 -> {
-
-                    ProductionQueueManager.clearQueue();
-
-                }
-
-                case 4 -> {
-
-                    System.out.println();
-                    System.out.println("==========================================");
-                    System.out.println("QUEUE STATISTICS");
-                    System.out.println("==========================================");
-
-                    System.out.println("Orders Waiting : "
-                            + ProductionQueueManager.getQueueSize());
-
-                    if (!ProductionQueueManager.isQueueEmpty()) {
-
-                        ProductionOrder next =
-                                ProductionQueueManager.peekNextOrder();
-
-                        System.out.println();
-                        System.out.println("Next Order");
-
-                        System.out.println("Order Number : "
-                                + next.getOrderNumber());
-
-                        System.out.println("Priority     : "
-                                + next.getPriority());
-
-                    }
-
-                }
+                case 4 -> showQueueStatistics();
 
                 case 0 -> {
-
                     return;
-
                 }
 
-                default -> {
-
-                    System.out.println("Invalid Choice.");
-
-                }
+                default -> System.out.println("Invalid Choice.");
 
             }
+
+        }
+
+    }
+
+    private static void processNextOrder() {
+
+        ProductionOrder order = ProductionQueueManager.getNextOrder();
+
+        if (order == null) {
+
+            System.out.println();
+            System.out.println("No pending production order has an available machine.");
+            return;
+
+        }
+
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("PRODUCTION STARTED");
+        System.out.println("==========================================");
+        System.out.println("Order Number : " + order.getOrderNumber());
+        System.out.println("Priority     : " + order.getPriority());
+        System.out.println("Product ID   : " + order.getProductId());
+        System.out.println("Quantity     : " + order.getQuantity());
+        System.out.println("Status       : IN_PROGRESS");
+
+        ProductionQueueManager.completeOrder(order.getOrderId());
+
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("MANUFACTURING FINISHED");
+        System.out.println("==========================================");
+        System.out.println("Order Number : " + order.getOrderNumber());
+        System.out.println("Status       : QUALITY_CHECK");
+        System.out.println("Ready For Quality Inspection.");
+        System.out.println("Remaining Queue : " + ProductionQueueManager.getQueueSize());
+
+    }
+
+    private static void showQueueStatistics() {
+
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("QUEUE STATISTICS");
+        System.out.println("==========================================");
+        System.out.println("Orders Waiting : " + ProductionQueueManager.getQueueSize());
+
+        ProductionOrder next = ProductionQueueManager.peekNextOrder();
+
+        if (next != null) {
+
+            System.out.println();
+            System.out.println("Next Order");
+            System.out.println("Order Number : " + next.getOrderNumber());
+            System.out.println("Priority     : " + next.getPriority());
 
         }
 

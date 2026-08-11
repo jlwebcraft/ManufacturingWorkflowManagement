@@ -2,6 +2,7 @@ package menu;
 
 import manager.ProductManager;
 import manager.ProductCategoryManager;
+import manager.RawMaterialManager;
 import model.Product;
 
 import java.util.Scanner;
@@ -10,7 +11,7 @@ public class ProductMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
             System.out.println();
@@ -22,6 +23,9 @@ public class ProductMenu {
             System.out.println("3. Update Product");
             System.out.println("4. Delete Product");
             System.out.println("5. Search Product");
+            System.out.println("6. Add / Update BOM Material");
+            System.out.println("7. View Product BOM");
+            System.out.println("8. Remove BOM Material");
             System.out.println("0. Back");
 
             System.out.print("Choice: ");
@@ -165,6 +169,95 @@ public class ProductMenu {
                     String keyword = scanner.nextLine().trim();
 
                     ProductManager.searchProduct(keyword);
+
+                    break;
+
+                case 6:
+
+                    ProductManager.showProductList();
+
+                    System.out.print("Enter Product ID: ");
+                    int bomProductId = Integer.parseInt(scanner.nextLine());
+
+                    if (!ProductManager.productExists(bomProductId)) {
+
+                        System.out.println("Invalid Product ID.");
+                        break;
+
+                    }
+
+                    RawMaterialManager.showRawMaterialList();
+
+                    System.out.print("Enter Raw Material ID: ");
+                    int materialId = Integer.parseInt(scanner.nextLine());
+
+                    if (!RawMaterialManager.rawMaterialExists(materialId)) {
+
+                        System.out.println("Invalid Raw Material ID.");
+                        break;
+
+                    }
+
+                    System.out.print("Quantity Required Per Product: ");
+                    double quantityRequired = Double.parseDouble(scanner.nextLine());
+
+                    if (quantityRequired <= 0) {
+
+                        System.out.println("Quantity required must be greater than zero.");
+                        break;
+
+                    }
+
+                    ProductManager.addProductMaterial(bomProductId, materialId, quantityRequired);
+
+                    break;
+
+                case 7:
+
+                    ProductManager.showProductList();
+
+                    System.out.print("Enter Product ID: ");
+                    int viewBomProductId = Integer.parseInt(scanner.nextLine());
+
+                    if (!ProductManager.productExists(viewBomProductId)) {
+
+                        System.out.println("Invalid Product ID.");
+                        break;
+
+                    }
+
+                    ProductManager.viewBillOfMaterials(viewBomProductId);
+
+                    break;
+
+                case 8:
+
+                    ProductManager.showProductList();
+
+                    System.out.print("Enter Product ID: ");
+                    int removeBomProductId = Integer.parseInt(scanner.nextLine());
+
+                    if (!ProductManager.productExists(removeBomProductId)) {
+
+                        System.out.println("Invalid Product ID.");
+                        break;
+
+                    }
+
+                    ProductManager.viewBillOfMaterials(removeBomProductId);
+                    RawMaterialManager.showRawMaterialList();
+
+                    System.out.print("Enter Raw Material ID to Remove: ");
+                    int removeMaterialId = Integer.parseInt(scanner.nextLine());
+
+                    if (!RawMaterialManager.rawMaterialExists(removeMaterialId)) {
+
+                        System.out.println("Invalid Raw Material ID.");
+                        break;
+
+                    }
+
+                    ProductManager.removeProductMaterial(removeBomProductId, removeMaterialId);
 
                     break;
 

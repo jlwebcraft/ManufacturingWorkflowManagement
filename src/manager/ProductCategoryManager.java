@@ -118,9 +118,9 @@ public class ProductCategoryManager {
             int rows = preparedStatement.executeUpdate();
 
             if (rows > 0) {
-                System.out.println("✓ Category updated successfully.");
+                System.out.println("Category updated successfully.");
             } else {
-                System.out.println("✗ Category ID not found.");
+                System.out.println("Category ID not found.");
             }
 
         } catch (SQLException e) {
@@ -181,11 +181,11 @@ public class ProductCategoryManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ Category deleted successfully.");
+                System.out.println("Category deleted successfully.");
 
             } else {
 
-                System.out.println("✗ Category ID not found.");
+                System.out.println("Category ID not found.");
 
             }
 

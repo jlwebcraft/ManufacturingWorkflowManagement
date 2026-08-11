@@ -12,7 +12,7 @@ public class ProductionOrderMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 
@@ -23,7 +23,7 @@ public class ProductionOrderMenu {
 
             System.out.println("1. Create Production Order");
             System.out.println("2. View Production Orders");
-            System.out.println("3. Update Order Status");
+            System.out.println("3. Update Manufacturing Status");
             System.out.println("4. Cancel Production Order");
             System.out.println("5. Search Production Order");
             System.out.println("0. Back");
@@ -75,14 +75,14 @@ public class ProductionOrderMenu {
 
                     }
 
-                    MachineManager.showMachineList();
+                    MachineManager.showAvailableMachines();
 
                     System.out.print("Enter Machine ID: ");
                     int machineId = Integer.parseInt(scanner.nextLine());
 
-                    if (!MachineManager.machineExists(machineId)) {
+                    if (!MachineManager.machineAvailable(machineId)) {
 
-                        System.out.println("Invalid Machine ID.");
+                        System.out.println("Invalid Machine ID or machine is not available.");
                         break;
 
                     }
@@ -141,8 +141,8 @@ public class ProductionOrderMenu {
 
                     ProductionOrder order = new ProductionOrder(
                             productId,
-                            quantity,
                             machineId,
+                            quantity,
                             userId,
                             priority
                     );
@@ -150,7 +150,6 @@ public class ProductionOrderMenu {
                     ProductionOrderManager.addProductionOrder(order);
 
                 }
-
                 case 2 -> {
 
                     ProductionOrderManager.viewProductionOrders();
@@ -173,11 +172,10 @@ public class ProductionOrderMenu {
 
                     System.out.println();
                     System.out.println("==========================================");
-                    System.out.println("\tUPDATE ORDER STATUS");
+                    System.out.println("\tUPDATE MANUFACTURING STATUS");
                     System.out.println("==========================================");
-                    System.out.println("1. PENDING");
-                    System.out.println("2. IN_PROGRESS");
-                    System.out.println("3. COMPLETED");
+                    System.out.println("1. Start Manufacturing");
+                    System.out.println("2. Send To Quality Check");
 
                     System.out.print("Choice: ");
 
@@ -188,15 +186,11 @@ public class ProductionOrderMenu {
                     switch (statusChoice) {
 
                         case 1:
-                            status = "PENDING";
-                            break;
-
-                        case 2:
                             status = "IN_PROGRESS";
                             break;
 
-                        case 3:
-                            status = "COMPLETED";
+                        case 2:
+                            status = "QUALITY_CHECK";
                             break;
 
                         default:

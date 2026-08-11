@@ -151,15 +151,12 @@ public class ReportManager {
                     po.order_number,
                     p.product_name,
                     po.quantity,
-                    m.machine_name,
                     u.name,
                     po.status,
                     po.created_at
                 FROM production_orders po
                 INNER JOIN products p
                     ON po.product_id = p.product_id
-                INNER JOIN machines m
-                    ON po.machine_id = m.machine_id
                 INNER JOIN users u
                     ON po.created_by = u.user_id
                 ORDER BY po.created_at DESC
@@ -195,9 +192,6 @@ public class ReportManager {
                 System.out.println("Quantity  : "
                         + resultSet.getInt("quantity"));
 
-                System.out.println("Machine   : "
-                        + resultSet.getString("machine_name"));
-
                 System.out.println("Created By: "
                         + resultSet.getString("name"));
 
@@ -225,79 +219,49 @@ public class ReportManager {
         }
 
     }
-
-    public static void machineMaintenanceReport() {
+    public static void finishedGoodsReport() {
 
         String sql = """
-                SELECT
-                    m.machine_name,
-                    mm.maintenance_date,
-                    mm.maintenance_type,
-                    mm.technician,
-                    mm.cost,
-                    mm.next_service_date
-                FROM machine_maintenance mm
-                INNER JOIN machines m
-                    ON mm.machine_id = m.machine_id
-                ORDER BY mm.maintenance_date DESC
+                SELECT p.product_name,
+                       fgi.available_quantity,
+                       fgi.last_updated
+                FROM finished_goods_inventory fgi
+                INNER JOIN products p
+                    ON fgi.product_id = p.product_id
+                ORDER BY p.product_name
                 """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql);
-                ResultSet resultSet =
-                        preparedStatement.executeQuery()
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()
         ) {
 
             boolean found = false;
 
             System.out.println();
             System.out.println("==========================================");
-            System.out.println("\tMACHINE MAINTENANCE REPORT");
+            System.out.println("\tFINISHED GOODS INVENTORY");
             System.out.println("==========================================");
             System.out.println();
 
             while (resultSet.next()) {
-
                 found = true;
-
                 System.out.println("------------------------------------------");
-                System.out.println("Machine      : "
-                        + resultSet.getString("machine_name"));
-
-                System.out.println("Date         : "
-                        + resultSet.getString("maintenance_date"));
-
-                System.out.println("Type         : "
-                        + resultSet.getString("maintenance_type"));
-
-                System.out.println("Technician   : "
-                        + resultSet.getString("technician"));
-
-                System.out.println("Cost         : "
-                        + resultSet.getDouble("cost"));
-
-                System.out.println("Next Service : "
-                        + resultSet.getString("next_service_date"));
-
+                System.out.println("Product  : " + resultSet.getString("product_name"));
+                System.out.println("Quantity : " + resultSet.getInt("available_quantity"));
+                System.out.println("Updated  : " + resultSet.getTimestamp("last_updated"));
                 System.out.println("------------------------------------------");
-
             }
 
             if (!found) {
-
-                System.out.println("No maintenance records found.");
-
+                System.out.println("No finished goods found.");
             }
 
         } catch (SQLException e) {
-
-            System.out.println("Unable to generate maintenance report.");
+            System.out.println("Unable to generate finished goods report.");
             e.printStackTrace();
-
         }
 
     }
-
 }

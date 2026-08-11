@@ -3,7 +3,6 @@ package model;
 public class RawMaterial {
 
     private int materialId;
-    private int supplierId;
     private String materialName;
     private String unit;
     private double costPerUnit;
@@ -12,12 +11,10 @@ public class RawMaterial {
     public RawMaterial() {
     }
 
-    public RawMaterial(int supplierId,
-                       String materialName,
+    public RawMaterial(String materialName,
                        String unit,
                        double costPerUnit) {
 
-        this.supplierId = supplierId;
         this.materialName = materialName;
         this.unit = unit;
         this.costPerUnit = costPerUnit;
@@ -25,14 +22,12 @@ public class RawMaterial {
     }
 
     public RawMaterial(int materialId,
-                       int supplierId,
                        String materialName,
                        String unit,
                        double costPerUnit,
                        String status) {
 
         this.materialId = materialId;
-        this.supplierId = supplierId;
         this.materialName = materialName;
         this.unit = unit;
         this.costPerUnit = costPerUnit;
@@ -46,14 +41,6 @@ public class RawMaterial {
 
     public void setMaterialId(int materialId) {
         this.materialId = materialId;
-    }
-
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
     }
 
     public String getMaterialName() {

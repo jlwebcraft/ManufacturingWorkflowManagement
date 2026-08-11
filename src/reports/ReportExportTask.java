@@ -32,15 +32,7 @@ public class ReportExportTask implements Runnable {
 
             exportProductionOrders(writer);
 
-            exportMachineMaintenance(writer);
-
             ReportExporter.closeReport(writer);
-
-//            System.out.println();
-//            System.out.println("==========================================");
-//            System.out.println("Monthly report exported successfully.");
-//            System.out.println("Location : reports/");
-//            System.out.println("==========================================");
 
         } catch (Exception e) {
 
@@ -224,66 +216,4 @@ public class ReportExportTask implements Runnable {
         }
 
     }
-
-    private void exportMachineMaintenance(BufferedWriter writer)
-            throws Exception {
-
-        writer.write("========= MACHINE MAINTENANCE =========");
-        writer.newLine();
-        writer.newLine();
-
-        String sql = """
-                SELECT
-                    m.machine_name,
-                    mm.maintenance_date,
-                    mm.maintenance_type,
-                    mm.technician,
-                    mm.cost
-                FROM machine_maintenance mm
-                INNER JOIN machines m
-                    ON mm.machine_id = m.machine_id
-                ORDER BY mm.maintenance_date DESC
-                """;
-
-        try (
-                Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql);
-                ResultSet resultSet =
-                        preparedStatement.executeQuery()
-        ) {
-
-            while (resultSet.next()) {
-
-                writer.write("Machine : "
-                        + resultSet.getString("machine_name"));
-                writer.newLine();
-
-                writer.write("Date : "
-                        + resultSet.getString("maintenance_date"));
-                writer.newLine();
-
-                writer.write("Type : "
-                        + resultSet.getString("maintenance_type"));
-                writer.newLine();
-
-                writer.write("Technician : "
-                        + resultSet.getString("technician"));
-                writer.newLine();
-
-                writer.write("Cost : ₹"
-                        + resultSet.getDouble("cost"));
-                writer.newLine();
-
-                writer.write("----------------------------------------------");
-                writer.newLine();
-
-            }
-
-            writer.newLine();
-
-        }
-
-    }
-
 }

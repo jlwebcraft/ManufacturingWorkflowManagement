@@ -6,7 +6,7 @@ public class MainMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 
@@ -17,15 +17,16 @@ public class MainMenu {
             System.out.println();
             System.out.println("1. User Management");
             System.out.println("2. Product Categories");
-            System.out.println("3. Products");
-            System.out.println("4. Suppliers");
+            System.out.println("3. Products / BOM");
+            System.out.println("4. Buy Department");
             System.out.println("5. Raw Materials");
             System.out.println("6. Inventory");
-            System.out.println("7. Machines");
+            System.out.println("7. Machines / Resources");
             System.out.println("8. Production Orders");
-            System.out.println("9. Machine Maintenance");
-            System.out.println("10. Production Queue");
+            System.out.println("9. Production Queue");
+            System.out.println("10. Quality Inspection");
             System.out.println("11. Reports");
+            System.out.println("12. Java / DSA / DBMS Practice");
             System.out.println("0. Logout");
             System.out.println();
 
@@ -41,63 +42,40 @@ public class MainMenu {
 
                 System.out.println("Invalid input!");
                 continue;
-
             }
 
             switch (choice) {
 
-                case 1->{
-                    UserMenu.showMenu();
-                }
+                case 1 -> UserMenu.showMenu();
 
-                case 2-> {
-                    ProductCategoryMenu.showMenu();
-                }
+                case 2 -> ProductCategoryMenu.showMenu();
 
-                case 3->{
-                    ProductMenu.showMenu();
-                }
+                case 3 -> ProductMenu.showMenu();
 
-                case 4-> {
-                    SupplierMenu.showMenu();
-                }
+                case 4 -> BuyDepartmentMenu.showMenu();
 
-                case 5-> {
-                    RawMaterialMenu.showMenu();
-                }
+                case 5 -> RawMaterialMenu.showMenu();
 
-                case 6-> {
-                    InventoryMenu.showMenu();
-                }
+                case 6 -> InventoryMenu.showMenu();
 
-                case 7-> {
-                    MachineMenu.showMenu();
-                }
+                case 7 -> MachineMenu.showMenu();
 
-                case 8-> {
-                    ProductionOrderMenu.showMenu();
-                }
+                case 8 -> ProductionOrderMenu.showMenu();
 
-                case 9-> {
-                    MachineMaintenanceMenu.showMenu();
-                }
+                case 9 -> ProductionQueueMenu.showMenu();
 
-                case 10 -> {
-                    ProductionQueueMenu.showMenu();
-                }
+                case 10 -> QualityInspectionMenu.showMenu();
 
-                case 11 -> {
-                    ReportMenu.showMenu();
-                }
+                case 11 -> ReportMenu.showMenu();
 
-                case 0-> {
+                case 12 -> WorkflowConceptMenu.showMenu();
+
+                case 0 -> {
                     System.out.println("Logged Out Successfully.");
                     return;
                 }
 
-                default-> {
-                    System.out.println("Invalid Choice!");
-                }
+                default -> System.out.println("Invalid Choice!");
 
             }
 

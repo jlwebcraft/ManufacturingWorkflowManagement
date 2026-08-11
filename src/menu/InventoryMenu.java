@@ -10,7 +10,7 @@ public class InventoryMenu {
 
     public static void showMenu() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         while (true) {
 
@@ -24,6 +24,7 @@ public class InventoryMenu {
             System.out.println("3. Add Stock");
             System.out.println("4. Remove Stock");
             System.out.println("5. Search Inventory");
+            System.out.println("6. Remove Raw Material From Inventory");
             System.out.println("0. Back");
 
             System.out.print("Choice: ");
@@ -47,12 +48,12 @@ public class InventoryMenu {
 
                     RawMaterialManager.showRawMaterialList();
 
-                    System.out.print("Enter Material ID: ");
+                    System.out.print("Enter Raw Material ID: ");
                     int materialId = Integer.parseInt(scanner.nextLine());
 
                     if (!RawMaterialManager.rawMaterialExists(materialId)) {
 
-                        System.out.println("Invalid Material ID.");
+                        System.out.println("Invalid Raw Material ID. Add it in Raw Materials first.");
                         break;
 
                     }
@@ -60,6 +61,16 @@ public class InventoryMenu {
                     if (InventoryManager.inventoryRecordExists(materialId)) {
 
                         System.out.println("Inventory record already exists for this material.");
+                        break;
+
+                    }
+
+                    System.out.print("Inventory Record Name: ");
+                    String inventoryName = scanner.nextLine().trim();
+
+                    if (inventoryName.isBlank()) {
+
+                        System.out.println("Inventory record name cannot be empty.");
                         break;
 
                     }
@@ -102,6 +113,7 @@ public class InventoryMenu {
 
                     Inventory inventory = new Inventory(
                             materialId,
+                            inventoryName,
                             currentStock,
                             minimumStock,
                             maximumStock
@@ -111,9 +123,7 @@ public class InventoryMenu {
 
                 }
 
-                case 2 -> {
-                    InventoryManager.viewInventory();
-                }
+                case 2 -> InventoryManager.viewInventory();
 
                 case 3 -> {
 
@@ -159,10 +169,28 @@ public class InventoryMenu {
 
                 case 5 -> {
 
-                    System.out.print("Enter Material Name: ");
+                    System.out.print("Enter Inventory or Material Name: ");
                     String keyword = scanner.nextLine();
 
                     InventoryManager.searchInventory(keyword);
+
+                }
+
+                case 6 -> {
+
+                    InventoryManager.showInventoryList();
+
+                    System.out.print("Enter Inventory ID to Remove: ");
+                    int inventoryId = Integer.parseInt(scanner.nextLine());
+
+                    if (!InventoryManager.inventoryExists(inventoryId)) {
+
+                        System.out.println("Invalid Inventory ID.");
+                        break;
+
+                    }
+
+                    InventoryManager.removeRawMaterialFromInventory(inventoryId);
 
                 }
 

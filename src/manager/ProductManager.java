@@ -5,7 +5,7 @@ import model.Product;
 import util.ConsoleFormatter;
 
 import java.sql.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class ProductManager {
 
@@ -35,7 +35,7 @@ public class ProductManager {
             if (rows > 0) {
 
                 System.out.println();
-                System.out.println("✓ Product added successfully.");
+                System.out.println("Product added successfully.");
 
             }
 
@@ -52,7 +52,7 @@ public class ProductManager {
 
         final int PAGE_SIZE = 10;
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = util.InputScanner.getScanner();
 
         String countSql = """
             SELECT COUNT(*)
@@ -155,8 +155,8 @@ public class ProductManager {
                                     + resultSet.getInt("estimated_production_hours")
                                     + " Hours");
 
-                            System.out.println("Selling Price   : "
-                                    + String.format("₹%,.2f",
+                            System.out.println("Selling Price   : Rs. "
+                                    + String.format("%,.2f",
                                     resultSet.getDouble("selling_price")));
 
                             System.out.println("Status          : "
@@ -264,7 +264,7 @@ public class ProductManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ Product updated successfully.");
+                System.out.println("Product updated successfully.");
 
             } else {
 
@@ -335,7 +335,7 @@ public class ProductManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ Product deleted successfully.");
+                System.out.println("Product deleted successfully.");
 
             } else {
 
@@ -472,4 +472,119 @@ public class ProductManager {
 
     }
 
+    public static void addProductMaterial(int productId, int materialId, double quantityRequired) {
+
+        String sql = """
+            INSERT INTO product_materials
+            (product_id, material_id, quantity_required)
+            VALUES (?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                quantity_required = VALUES(quantity_required)
+            """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
+            preparedStatement.setInt(1, productId);
+            preparedStatement.setInt(2, materialId);
+            preparedStatement.setDouble(3, quantityRequired);
+
+            int rows = preparedStatement.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("BOM material saved successfully.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to save BOM material.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void viewBillOfMaterials(int productId) {
+
+        String sql = """
+            SELECT p.product_name,
+                   rm.material_id,
+                   rm.material_name,
+                   rm.unit,
+                   pm.quantity_required
+            FROM product_materials pm
+            INNER JOIN products p
+                ON pm.product_id = p.product_id
+            INNER JOIN raw_materials rm
+                ON pm.material_id = rm.material_id
+            WHERE pm.product_id = ?
+            ORDER BY rm.material_name
+            """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
+            preparedStatement.setInt(1, productId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                boolean found = false;
+
+                System.out.println();
+                System.out.println("==========================================");
+                System.out.println("\tBILL OF MATERIALS");
+                System.out.println("==========================================");
+                System.out.println();
+                System.out.println(
+                        ConsoleFormatter.padRight("ID", 5)
+                                + ConsoleFormatter.padRight("Raw Material", 28)
+                                + ConsoleFormatter.padRight("Unit", 12)
+                                + "Required Qty"
+                );
+                System.out.println("----------------------------------------------------------------");
+
+                while (resultSet.next()) {
+                    found = true;
+                    System.out.println(
+                            ConsoleFormatter.padRight(String.valueOf(resultSet.getInt("material_id")), 5)
+                                    + ConsoleFormatter.padRight(resultSet.getString("material_name"), 28)
+                                    + ConsoleFormatter.padRight(resultSet.getString("unit"), 12)
+                                    + resultSet.getDouble("quantity_required")
+                    );
+                }
+
+                if (!found) {
+                    System.out.println("No BOM materials assigned to this product.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to load BOM.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeProductMaterial(int productId, int materialId) {
+
+        String sql = """
+            DELETE FROM product_materials
+            WHERE product_id = ?
+              AND material_id = ?
+            """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
+            preparedStatement.setInt(1, productId);
+            preparedStatement.setInt(2, materialId);
+
+            int rows = preparedStatement.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("BOM material removed successfully.");
+            } else {
+                System.out.println("BOM material not found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to remove BOM material.");
+            e.printStackTrace();
+        }
+    }
 }

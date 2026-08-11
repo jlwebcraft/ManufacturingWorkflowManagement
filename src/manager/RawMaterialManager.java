@@ -12,8 +12,8 @@ public class RawMaterialManager {
 
         String sql = """
                 INSERT INTO raw_materials
-                (supplier_id, material_name, unit, cost_per_unit)
-                VALUES (?, ?, ?, ?)
+                (material_name, unit, cost_per_unit)
+                VALUES (?, ?, ?)
                 """;
 
         try (
@@ -22,16 +22,15 @@ public class RawMaterialManager {
                         connection.prepareStatement(sql)
         ) {
 
-            preparedStatement.setInt(1, rawMaterial.getSupplierId());
-            preparedStatement.setString(2, rawMaterial.getMaterialName());
-            preparedStatement.setString(3, rawMaterial.getUnit());
-            preparedStatement.setDouble(4, rawMaterial.getCostPerUnit());
+            preparedStatement.setString(1, rawMaterial.getMaterialName());
+            preparedStatement.setString(2, rawMaterial.getUnit());
+            preparedStatement.setDouble(3, rawMaterial.getCostPerUnit());
 
             int rows = preparedStatement.executeUpdate();
 
             if (rows > 0) {
 
-                System.out.println("✓ Raw Material added successfully.");
+                System.out.println("Raw Material added successfully.");
 
             }
 
@@ -47,17 +46,14 @@ public class RawMaterialManager {
     public static void viewRawMaterials() {
 
         String sql = """
-        SELECT rm.material_id,
-               s.supplier_name,
-               rm.material_name,
-               rm.unit,
-               rm.cost_per_unit,
-               rm.status
-        FROM raw_materials rm
-        INNER JOIN suppliers s
-        ON rm.supplier_id = s.supplier_id
-        WHERE rm.status = 'ACTIVE'
-        ORDER BY rm.material_id
+        SELECT material_id,
+               material_name,
+               unit,
+               cost_per_unit,
+               status
+        FROM raw_materials
+        WHERE status = 'ACTIVE'
+        ORDER BY material_id
         """;
 
         try (
@@ -83,15 +79,12 @@ public class RawMaterialManager {
                 System.out.println("--------------------------------------------------");
                 System.out.println("Material ID    : "
                         + resultSet.getInt("material_id"));
-                System.out.println("Supplier       : "
-                        + resultSet.getString("supplier_name"));
                 System.out.println("Material Name  : "
                         + resultSet.getString("material_name"));
                 System.out.println("Unit           : "
                         + resultSet.getString("unit"));
                 System.out.println("Cost Per Unit  : "
-                        + String.format("₹%,.2f",
-                        resultSet.getDouble("cost_per_unit")));
+                        + String.format("%,.2f", resultSet.getDouble("cost_per_unit")));
                 System.out.println("Status         : "
                         + resultSet.getString("status"));
                 System.out.println("--------------------------------------------------");
@@ -112,6 +105,7 @@ public class RawMaterialManager {
             SELECT material_id
             FROM raw_materials
             WHERE material_id = ?
+            AND status = 'ACTIVE'
             """;
 
         try (
@@ -144,8 +138,7 @@ public class RawMaterialManager {
 
         String sql = """
             UPDATE raw_materials
-            SET supplier_id = ?,
-                material_name = ?,
+            SET material_name = ?,
                 unit = ?,
                 cost_per_unit = ?
             WHERE material_id = ?
@@ -157,17 +150,16 @@ public class RawMaterialManager {
                         connection.prepareStatement(sql)
         ) {
 
-            preparedStatement.setInt(1, rawMaterial.getSupplierId());
-            preparedStatement.setString(2, rawMaterial.getMaterialName());
-            preparedStatement.setString(3, rawMaterial.getUnit());
-            preparedStatement.setDouble(4, rawMaterial.getCostPerUnit());
-            preparedStatement.setInt(5, rawMaterial.getMaterialId());
+            preparedStatement.setString(1, rawMaterial.getMaterialName());
+            preparedStatement.setString(2, rawMaterial.getUnit());
+            preparedStatement.setDouble(3, rawMaterial.getCostPerUnit());
+            preparedStatement.setInt(4, rawMaterial.getMaterialId());
 
             int rows = preparedStatement.executeUpdate();
 
             if (rows > 0) {
 
-                System.out.println("✓ Raw Material updated successfully.");
+                System.out.println("Raw Material updated successfully.");
 
             } else {
 
@@ -204,7 +196,7 @@ public class RawMaterialManager {
 
             if (rows > 0) {
 
-                System.out.println("✓ Raw Material deleted successfully.");
+                System.out.println("Raw Material deleted successfully.");
 
             } else {
 
@@ -224,18 +216,15 @@ public class RawMaterialManager {
     public static void searchRawMaterial(String keyword) {
 
         String sql = """
-        SELECT rm.material_id,
-               s.supplier_name,
-               rm.material_name,
-               rm.unit,
-               rm.cost_per_unit,
-               rm.status
-        FROM raw_materials rm
-        INNER JOIN suppliers s
-        ON rm.supplier_id = s.supplier_id
-        WHERE rm.material_name LIKE ?
-        AND rm.status = 'ACTIVE'
-        ORDER BY rm.material_name
+        SELECT material_id,
+               material_name,
+               unit,
+               cost_per_unit,
+               status
+        FROM raw_materials
+        WHERE material_name LIKE ?
+        AND status = 'ACTIVE'
+        ORDER BY material_name
         """;
 
         try (
@@ -263,15 +252,12 @@ public class RawMaterialManager {
                 System.out.println("--------------------------------------------------");
                 System.out.println("Material ID    : "
                         + resultSet.getInt("material_id"));
-                System.out.println("Supplier       : "
-                        + resultSet.getString("supplier_name"));
                 System.out.println("Material Name  : "
                         + resultSet.getString("material_name"));
                 System.out.println("Unit           : "
                         + resultSet.getString("unit"));
                 System.out.println("Cost Per Unit  : "
-                        + String.format("₹%,.2f",
-                        resultSet.getDouble("cost_per_unit")));
+                        + String.format("%,.2f", resultSet.getDouble("cost_per_unit")));
                 System.out.println("Status         : "
                         + resultSet.getString("status"));
                 System.out.println("--------------------------------------------------");
@@ -294,12 +280,13 @@ public class RawMaterialManager {
         }
 
     }
-
     public static void showRawMaterialList() {
 
         String sql = """
             SELECT material_id,
-                   material_name
+                   material_name,
+                   unit,
+                   cost_per_unit
             FROM raw_materials
             WHERE status = 'ACTIVE'
             ORDER BY material_id
@@ -318,15 +305,23 @@ public class RawMaterialManager {
             System.out.println("==========================================");
             System.out.println();
 
-            System.out.println("ID\tMaterial Name");
-            System.out.println("------------------------------------------");
+            System.out.println(
+                    ConsoleFormatter.padRight("ID", 5)
+                            + ConsoleFormatter.padRight("Raw Material", 28)
+                            + ConsoleFormatter.padRight("Unit", 12)
+                            + "Cost Per Unit"
+            );
+            System.out.println("------------------------------------------------------------");
 
             while (resultSet.next()) {
 
                 System.out.println(
                         ConsoleFormatter.padRight(
                                 String.valueOf(resultSet.getInt("material_id")), 5)
-                                + resultSet.getString("material_name"));
+                                + ConsoleFormatter.padRight(resultSet.getString("material_name"), 28)
+                                + ConsoleFormatter.padRight(resultSet.getString("unit"), 12)
+                                + String.format("%,.2f", resultSet.getDouble("cost_per_unit"))
+                );
 
             }
 

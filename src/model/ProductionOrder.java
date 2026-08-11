@@ -5,8 +5,8 @@ public class ProductionOrder {
     private int orderId;
     private String orderNumber;
     private int productId;
-    private int quantity;
     private int machineId;
+    private int quantity;
     private int createdBy;
     private String priority;
     private String status;
@@ -15,14 +15,14 @@ public class ProductionOrder {
     }
 
     public ProductionOrder(int productId,
-                           int quantity,
                            int machineId,
+                           int quantity,
                            int createdBy,
                            String priority) {
 
         this.productId = productId;
-        this.quantity = quantity;
         this.machineId = machineId;
+        this.quantity = quantity;
         this.createdBy = createdBy;
         this.priority = priority;
 
@@ -31,8 +31,8 @@ public class ProductionOrder {
     public ProductionOrder(int orderId,
                            String orderNumber,
                            int productId,
-                           int quantity,
                            int machineId,
+                           int quantity,
                            int createdBy,
                            String priority,
                            String status) {
@@ -40,8 +40,8 @@ public class ProductionOrder {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
         this.productId = productId;
-        this.quantity = quantity;
         this.machineId = machineId;
+        this.quantity = quantity;
         this.createdBy = createdBy;
         this.priority = priority;
         this.status = status;
@@ -72,20 +72,20 @@ public class ProductionOrder {
         this.productId = productId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getMachineId() {
         return machineId;
     }
 
     public void setMachineId(int machineId) {
         this.machineId = machineId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getCreatedBy() {

@@ -1,129 +1,122 @@
 package manager;
 
 import database.DatabaseConnection;
-import model.Machine;
 import util.ConsoleFormatter;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MachineManager {
 
-    public static void addMachine(Machine machine) {
+    public static void addMachine(String machineName,
+                                  String machineType,
+                                  int dailyCapacity) {
 
         String sql = """
-                INSERT INTO machines
-                (machine_name,
-                 machine_type,
-                 daily_capacity,
-                 capacity_unit,
-                 purchase_date,
-                 last_service_date,
-                 status)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                """;
+            INSERT INTO machines
+            (machine_name, machine_type, daily_capacity, status)
+            VALUES (?, ?, ?, 'AVAILABLE')
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-
-            preparedStatement.setString(1, machine.getMachineName());
-            preparedStatement.setString(2, machine.getMachineType());
-            preparedStatement.setInt(3, machine.getDailyCapacity());
-            preparedStatement.setString(4, machine.getCapacityUnit());
-            preparedStatement.setDate(5, Date.valueOf(machine.getPurchaseDate()));
-            preparedStatement.setDate(6, Date.valueOf(machine.getLastServiceDate()));
-            preparedStatement.setString(7, "AVAILABLE");
+            preparedStatement.setString(1, machineName);
+            preparedStatement.setString(2, machineType);
+            preparedStatement.setInt(3, dailyCapacity);
 
             int rows = preparedStatement.executeUpdate();
 
             if (rows > 0) {
-
-                System.out.println("✓ Machine added successfully.");
-
+                System.out.println("Machine added successfully.");
             }
-
         } catch (SQLException e) {
-
             System.out.println("Unable to add machine.");
             e.printStackTrace();
-
         }
-
     }
 
     public static void viewMachines() {
 
         String sql = """
-        SELECT machine_id,
-               machine_name,
-               machine_type,
-               daily_capacity,
-               capacity_unit,
-               purchase_date,
-               last_service_date,
-               status
-        FROM machines
-        WHERE status = 'AVAILABLE'
-        ORDER BY machine_id
-        """;
+            SELECT machine_id,
+                   machine_name,
+                   machine_type,
+                   daily_capacity,
+                   status
+            FROM machines
+            ORDER BY machine_id
+            """;
+
+        displayMachines(sql, "ALL MACHINES / RESOURCES");
+    }
+
+    public static void showAvailableMachines() {
+
+        String sql = """
+            SELECT machine_id,
+                   machine_name,
+                   machine_type,
+                   daily_capacity,
+                   status
+            FROM machines
+            WHERE status = 'AVAILABLE'
+            ORDER BY machine_id
+            """;
+
+        displayMachines(sql, "AVAILABLE MACHINES");
+    }
+
+    public static void showMaintenanceMachines() {
+
+        String sql = """
+            SELECT machine_id,
+                   machine_name,
+                   machine_type,
+                   daily_capacity,
+                   status
+            FROM machines
+            WHERE status = 'MAINTENANCE'
+            ORDER BY machine_id
+            """;
+
+        displayMachines(sql, "MACHINES UNDER MAINTENANCE");
+    }
+
+    public static void searchMachine(String keyword) {
+
+        String sql = """
+            SELECT machine_id,
+                   machine_name,
+                   machine_type,
+                   daily_capacity,
+                   status
+            FROM machines
+            WHERE machine_name LIKE ?
+               OR machine_type LIKE ?
+               OR status LIKE ?
+            ORDER BY machine_id
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql);
-                ResultSet resultSet =
-                        preparedStatement.executeQuery()
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
+            String search = "%" + keyword + "%";
+            preparedStatement.setString(1, search);
+            preparedStatement.setString(2, search);
+            preparedStatement.setString(3, search);
 
-            boolean found = false;
-
-            System.out.println();
-            System.out.println("==================================================");
-            System.out.println("\t\tAVAILABLE MACHINES");
-            System.out.println("==================================================");
-
-            while (resultSet.next()) {
-
-                found = true;
-
-                System.out.println();
-                System.out.println("--------------------------------------------------");
-                System.out.println("Machine ID        : "
-                        + resultSet.getInt("machine_id"));
-                System.out.println("Machine Name      : "
-                        + resultSet.getString("machine_name"));
-                System.out.println("Machine Type      : "
-                        + resultSet.getString("machine_type"));
-                System.out.println("Daily Capacity    : "
-                        + resultSet.getInt("daily_capacity")
-                        + " "
-                        + resultSet.getString("capacity_unit"));
-                System.out.println("Purchase Date     : "
-                        + resultSet.getDate("purchase_date"));
-                System.out.println("Last Service Date : "
-                        + resultSet.getDate("last_service_date"));
-                System.out.println("Status            : "
-                        + resultSet.getString("status"));
-                System.out.println("--------------------------------------------------");
-
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                printMachineResultSet(resultSet, "MACHINE SEARCH RESULTS");
             }
-
-            if (!found) {
-
-                System.out.println();
-                System.out.println("No machines found.");
-
-            }
-
         } catch (SQLException e) {
-
-            System.out.println("Unable to view machines.");
+            System.out.println("Unable to search machines.");
             e.printStackTrace();
-
         }
-
     }
 
     public static boolean machineExists(int machineId) {
@@ -136,237 +129,122 @@ public class MachineManager {
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-
             preparedStatement.setInt(1, machineId);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            boolean exists = resultSet.next();
-
-            resultSet.close();
-
-            return exists;
-
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
         } catch (SQLException e) {
-
+            System.out.println("Unable to validate machine.");
             e.printStackTrace();
-
         }
 
         return false;
-
     }
 
-    public static void updateMachine(Machine machine) {
+    public static boolean machineAvailable(int machineId) {
 
         String sql = """
-            UPDATE machines
-            SET machine_name = ?,
-                machine_type = ?,
-                daily_capacity = ?,
-                capacity_unit = ?,
-                purchase_date = ?,
-                last_service_date = ?
+            SELECT machine_id
+            FROM machines
             WHERE machine_id = ?
+              AND status = 'AVAILABLE'
             """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-
-            preparedStatement.setString(1, machine.getMachineName());
-            preparedStatement.setString(2, machine.getMachineType());
-            preparedStatement.setInt(3, machine.getDailyCapacity());
-            preparedStatement.setString(4, machine.getCapacityUnit());
-            preparedStatement.setDate(5, Date.valueOf(machine.getPurchaseDate()));
-            preparedStatement.setDate(6, Date.valueOf(machine.getLastServiceDate()));
-            preparedStatement.setInt(7, machine.getMachineId());
-
-            int rows = preparedStatement.executeUpdate();
-
-            if (rows > 0) {
-
-                System.out.println("✓ Machine updated successfully.");
-
-            } else {
-
-                System.out.println("Invalid Machine ID.");
-
-            }
-
-        } catch (SQLException e) {
-
-            System.out.println("Unable to update machine.");
-            e.printStackTrace();
-
-        }
-
-    }
-
-    public static void deleteMachine(int machineId) {
-
-        String sql = """
-            UPDATE machines
-            SET status = 'INACTIVE'
-            WHERE machine_id = ?
-            """;
-
-        try (
-                Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
-        ) {
-
             preparedStatement.setInt(1, machineId);
 
-            int rows = preparedStatement.executeUpdate();
-
-            if (rows > 0) {
-
-                System.out.println("✓ Machine deleted successfully.");
-
-            } else {
-
-                System.out.println("Invalid Machine ID.");
-
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
             }
-
         } catch (SQLException e) {
-
-            System.out.println("Unable to delete machine.");
+            System.out.println("Unable to validate machine availability.");
             e.printStackTrace();
-
         }
 
+        return false;
     }
 
-    public static void searchMachine(String keyword) {
+    public static void updateMachineStatus(int machineId, String status) {
 
         String sql = """
-        SELECT machine_id,
-               machine_name,
-               machine_type,
-               daily_capacity,
-               capacity_unit,
-               purchase_date,
-               last_service_date,
-               status
-        FROM machines
-        WHERE machine_name LIKE ?
-        AND status = 'AVAILABLE'
-        ORDER BY machine_name
-        """;
+            UPDATE machines
+            SET status = ?
+            WHERE machine_id = ?
+            """;
 
         try (
                 Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, machineId);
 
-            preparedStatement.setString(1, "%" + keyword + "%");
+            int rows = preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            boolean found = false;
-
-            System.out.println();
-            System.out.println("==================================================");
-            System.out.println("\t\tSEARCH RESULTS");
-            System.out.println("==================================================");
-
-            while (resultSet.next()) {
-
-                found = true;
-
-                System.out.println();
-                System.out.println("--------------------------------------------------");
-                System.out.println("Machine ID        : "
-                        + resultSet.getInt("machine_id"));
-                System.out.println("Machine Name      : "
-                        + resultSet.getString("machine_name"));
-                System.out.println("Machine Type      : "
-                        + resultSet.getString("machine_type"));
-                System.out.println("Daily Capacity    : "
-                        + resultSet.getInt("daily_capacity")
-                        + " "
-                        + resultSet.getString("capacity_unit"));
-                System.out.println("Purchase Date     : "
-                        + resultSet.getDate("purchase_date"));
-                System.out.println("Last Service Date : "
-                        + resultSet.getDate("last_service_date"));
-                System.out.println("Status            : "
-                        + resultSet.getString("status"));
-                System.out.println("--------------------------------------------------");
-
+            if (rows > 0) {
+                System.out.println("Machine status updated to " + status + ".");
+            } else {
+                System.out.println("Invalid Machine ID.");
             }
-
-            if (!found) {
-
-                System.out.println("No matching machine found.");
-
-            }
-
-            resultSet.close();
-
         } catch (SQLException e) {
-
-            System.out.println("Unable to search machine.");
+            System.out.println("Unable to update machine status.");
             e.printStackTrace();
-
         }
-
     }
 
     public static void showMachineList() {
-
-        String sql = """
-        SELECT machine_id,
-               machine_name
-        FROM machines
-        WHERE status = 'AVAILABLE'
-        ORDER BY machine_id
-        """;
-
-        try (
-                Connection connection = DatabaseConnection.connectDatabase();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql);
-                ResultSet resultSet =
-                        preparedStatement.executeQuery()
-        ) {
-
-            System.out.println();
-            System.out.println("==========================================");
-            System.out.println("\tAVAILABLE MACHINES");
-            System.out.println("==========================================");
-            System.out.println();
-
-            System.out.println("ID\tMachine Name");
-            System.out.println("------------------------------------------");
-
-            while (resultSet.next()) {
-
-                System.out.println(
-                        ConsoleFormatter.padRight(
-                                String.valueOf(resultSet.getInt("machine_id")), 5)
-                                + resultSet.getString("machine_name"));
-
-            }
-
-            System.out.println();
-
-        } catch (SQLException e) {
-
-            System.out.println("Unable to load machines.");
-            e.printStackTrace();
-
-        }
-
+        viewMachines();
     }
 
+    private static void displayMachines(String sql, String title) {
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()
+        ) {
+            printMachineResultSet(resultSet, title);
+        } catch (SQLException e) {
+            System.out.println("Unable to load machines.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void printMachineResultSet(ResultSet resultSet, String title) throws SQLException {
+        boolean found = false;
+
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("\t" + title);
+        System.out.println("==========================================");
+        System.out.println();
+        System.out.println(
+                ConsoleFormatter.padRight("ID", 5)
+                        + ConsoleFormatter.padRight("Machine", 28)
+                        + ConsoleFormatter.padRight("Type", 22)
+                        + ConsoleFormatter.padRight("Capacity", 12)
+                        + "Status"
+        );
+        System.out.println("--------------------------------------------------------------------------------");
+
+        while (resultSet.next()) {
+            found = true;
+            System.out.println(
+                    ConsoleFormatter.padRight(String.valueOf(resultSet.getInt("machine_id")), 5)
+                            + ConsoleFormatter.padRight(resultSet.getString("machine_name"), 28)
+                            + ConsoleFormatter.padRight(resultSet.getString("machine_type"), 22)
+                            + ConsoleFormatter.padRight(String.valueOf(resultSet.getInt("daily_capacity")), 12)
+                            + resultSet.getString("status")
+            );
+        }
+
+        if (!found) {
+            System.out.println("No machines found.");
+        }
+    }
 }
