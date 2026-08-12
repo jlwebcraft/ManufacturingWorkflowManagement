@@ -1,0 +1,720 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/k2ddgc",
+    "id": "k2ddgc",
+    "slide": 11,
+    "layoutId": "4374d4fe-83e0-4499-9cb5-99a15b10190b",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "951088f4-f09c-45f3-a803-a56becd6bd2f",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#FFFFFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "4374d4fe-83e0-4499-9cb5-99a15b10190b",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "951088f4-f09c-45f3-a803-a56becd6bd2f",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "951088f4-f09c-45f3-a803-a56becd6bd2f",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rq9czepk",
+      "id": "1",
+      "bbox": [
+        64,
+        36,
+        600,
+        26
+      ],
+      "geometry": "rect",
+      "text": "MANUFACTURING WORKFLOW MANAGEMENT",
+      "textPreview": "MANUFACTURING WORKFLOW MANAGEMENT",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#64748B",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "MANUFACTURING WORKFLOW MANAGEMENT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "MANUFACTURING WORKFLOW MANAGEMENT",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#64748B",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "MANUFACTURING WORKFLOW MANAGEMENT",
+              "fontSize": 13,
+              "color": "#64748B",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sritsjq5",
+      "id": "2",
+      "bbox": [
+        64,
+        72,
+        1030,
+        64
+      ],
+      "geometry": "rect",
+      "text": "DSA Inside the Workflow",
+      "textPreview": "DSA Inside the Workflow",
+      "resolvedFontSize": 38,
+      "resolvedTextStyle": {
+        "fontSize": 38,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DSA Inside the Workflow"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DSA Inside the Workflow",
+          "resolvedTextStyle": {
+            "fontSize": 38,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "DSA Inside the Workflow",
+              "fontSize": 38,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dsru1o7q",
+      "id": "3",
+      "bbox": [
+        64,
+        146,
+        1152,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#CBD5E1",
+      "lineWidth": 1.4
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0bm983",
+      "id": "4",
+      "bbox": [
+        94,
+        230,
+        210,
+        84
+      ],
+      "geometry": "roundRect",
+      "text": "PriorityQueue\nurgent orders first",
+      "textPreview": "PriorityQueue | urgent orders first",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PriorityQueue"
+          },
+          {
+            "index": 2,
+            "text": "urgent orders first"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PriorityQueue",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PriorityQueue",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "urgent orders first",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "urgent orders first",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FEF3C7",
+      "lineColor": "#B45309",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3m9cvepo",
+      "id": "5",
+      "bbox": [
+        382,
+        230,
+        210,
+        84
+      ],
+      "geometry": "roundRect",
+      "text": "Queue\nnormal order flow",
+      "textPreview": "Queue | normal order flow",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Queue"
+          },
+          {
+            "index": 2,
+            "text": "normal order flow"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Queue",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Queue",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "normal order flow",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "normal order flow",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#EFF6FF",
+      "lineColor": "#2563EB",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4nitojq9",
+      "id": "6",
+      "bbox": [
+        670,
+        230,
+        210,
+        84
+      ],
+      "geometry": "roundRect",
+      "text": "Stack\nundo last step",
+      "textPreview": "Stack | undo last step",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Stack"
+          },
+          {
+            "index": 2,
+            "text": "undo last step"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Stack",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Stack",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "undo last step",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "undo last step",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#FEE2E2",
+      "lineColor": "#B91C1C",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5oruxo7u",
+      "id": "7",
+      "bbox": [
+        958,
+        230,
+        210,
+        84
+      ],
+      "geometry": "roundRect",
+      "text": "LinkedList\nworkflow history",
+      "textPreview": "LinkedList | workflow history",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LinkedList"
+          },
+          {
+            "index": 2,
+            "text": "workflow history"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LinkedList",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LinkedList",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "workflow history",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "workflow history",
+              "fontSize": 17,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#ECFDF5",
+      "lineColor": "#15803D",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxgbip87",
+      "id": "8",
+      "bbox": [
+        304,
+        272,
+        78,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#B45309",
+      "lineWidth": 1.6
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vypcrups",
+      "id": "9",
+      "bbox": [
+        592,
+        272,
+        78,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#2563EB",
+      "lineWidth": 1.6
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rilcvq9w",
+      "id": "10",
+      "bbox": [
+        880,
+        272,
+        78,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#B91C1C",
+      "lineWidth": 1.6
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qhcbmlsb",
+      "id": "11",
+      "bbox": [
+        160,
+        432,
+        960,
+        78
+      ],
+      "geometry": "roundRect",
+      "text": "Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.",
+      "textPreview": "Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#111827",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Hashing supports fast lookup for products, raw materials and machines. BST gives"
+          },
+          {
+            "index": 2,
+            "text": "sorted/searchable catalog behavior for demonstration."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#111827",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.",
+              "fontSize": 23,
+              "color": "#111827",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#F8FAFC",
+      "lineColor": "#CBD5E1",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dk3ux0r2",
+      "id": "12",
+      "bbox": [
+        64,
+        674,
+        500,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Java | DBMS | Data Structures    11",
+      "textPreview": "Java | DBMS | Data Structures    11",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#64748B",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Java | DBMS | Data Structures    11"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Java | DBMS | Data Structures    11",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#64748B"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Java | DBMS | Data Structures    11",
+              "fontSize": 12,
+              "color": "#64748B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,269 @@
+{"kind":"deck","id":"pr/injbys","name":"Deck"}
+{"kind":"layout","layoutId":"951088f4-f09c-45f3-a803-a56becd6bd2f","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"4374d4fe-83e0-4499-9cb5-99a15b10190b","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/oc4x3k","slide":1,"title":"Manufacturing Workflow","textShapes":10}
+{"kind":"textbox","id":"sh/exsj65c7","slide":1,"text":"Manufacturing Workflow\nManagement System","textPreview":"Manufacturing Workflow | Management System","textChars":40,"textLines":2,"bbox":[72,90,760,150]}
+{"kind":"textbox","id":"sh/103ihkvy","slide":1,"text":"PC manufacturing project demonstrating Java, DBMS and data-structure concepts through one connected production workflow.","textPreview":"PC manufacturing project demonstrating Java, DBMS and data-structure concepts through one connected production workflow.","textChars":120,"textLines":1,"bbox":[76,258,760,78]}
+{"kind":"textbox","id":"sh/gzu18fud","slide":1,"text":"Product","textPreview":"Product","textChars":7,"textLines":1,"bbox":[780,118,150,56]}
+{"kind":"textbox","id":"sh/ru10badg","slide":1,"text":"BOM","textPreview":"BOM","textChars":3,"textLines":1,"bbox":[972,118,130,56]}
+{"kind":"textbox","id":"sh/6tsj25cb","slide":1,"text":"Inventory","textPreview":"Inventory","textChars":9,"textLines":1,"bbox":[780,244,150,56]}
+{"kind":"textbox","id":"sh/twjidkvm","slide":1,"text":"Production","textPreview":"Production","textChars":10,"textLines":1,"bbox":[972,244,150,56]}
+{"kind":"textbox","id":"sh/sva14fu1","slide":1,"text":"Inspection","textPreview":"Inspection","textChars":10,"textLines":1,"bbox":[780,370,150,56]}
+{"kind":"textbox","id":"sh/jq107qdk","slide":1,"text":"Delivery","textPreview":"Delivery","textChars":8,"textLines":1,"bbox":[972,370,150,56]}
+{"kind":"shape","id":"sh/i58zylcz","slide":1,"bbox":[930,146,42,0]}
+{"kind":"shape","id":"sh/w3i94juh","slide":1,"bbox":[1037,174,10,70]}
+{"kind":"shape","id":"sh/x4raxov2","slide":1,"bbox":[930,272,42,0]}
+{"kind":"shape","id":"sh/a10r29cr","slide":1,"bbox":[930,272,42,126]}
+{"kind":"shape","id":"sh/v29svedw","slide":1,"bbox":[930,398,42,0]}
+{"kind":"textbox","id":"sh/8zy90zul","slide":1,"text":"Core idea: every production step leaves a database record.","textPreview":"Core idea: every production step leaves a database record.","textChars":58,"textLines":1,"bbox":[72,512,820,64]}
+{"kind":"textbox","id":"sh/907at4v6","slide":1,"text":"Java | DBMS | Data Structures    1","textPreview":"Java | DBMS | Data Structures    1","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/oc4x3k","slide":1,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- app/Main.java\n- menu/MainMenu.java\n- database/DatabaseInitializer.java"}
+{"kind":"slide","id":"sl/fmavcv","slide":2,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":10}
+{"kind":"textbox","id":"sh/bihg76lc","slide":2,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/cjqhgbmx","slide":2,"text":"Real-World Problem Solved","textPreview":"Real-World Problem Solved","textChars":25,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/dkzy9g3i","slide":2,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/2toza14v","slide":2,"text":"Manual tracking","textPreview":"Manual tracking","textChars":15,"textLines":1,"bbox":[78,205,330,70]}
+{"kind":"textbox","id":"sh/3uxg36lg","slide":2,"text":"Raw material stock can be wrong, late, or duplicated.","textPreview":"Raw material stock can be wrong, late, or duplicated.","textChars":53,"textLines":1,"bbox":[96,300,294,116]}
+{"kind":"textbox","id":"sh/ov6hcbm1","slide":2,"text":"Production delays","textPreview":"Production delays","textChars":17,"textLines":1,"bbox":[468,205,330,70]}
+{"kind":"textbox","id":"sh/pgzy5w3m","slide":2,"text":"Orders wait when BOM, inventory, workers, or machines are unclear.","textPreview":"Orders wait when BOM, inventory, workers, or machines are unclear.","textChars":66,"textLines":1,"bbox":[486,300,294,116]}
+{"kind":"textbox","id":"sh/mpszml4z","slide":2,"text":"Poor traceability","textPreview":"Poor traceability","textChars":17,"textLines":1,"bbox":[858,205,330,70]}
+{"kind":"textbox","id":"sh/7q10fqlk","slide":2,"text":"Failed inspection and delivery status are hard to follow without history.","textPreview":"Failed inspection and delivery status are hard to follow without history.","textChars":73,"textLines":1,"bbox":[876,300,294,116]}
+{"kind":"textbox","id":"sh/rap8ra5k","slide":2,"text":"The project converts scattered manufacturing work into one controlled workflow: plan, source, produce, inspect, store and deliver.","textPreview":"The project converts scattered manufacturing work into one controlled workflow: plan, source, produce, inspect, store and deliver.","textChars":130,"textLines":1,"bbox":[112,498,1056,82]}
+{"kind":"textbox","id":"sh/q9gry5oz","slide":2,"text":"Java | DBMS | Data Structures    2","textPreview":"Java | DBMS | Data Structures    2","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/fmavcv","slide":2,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- Project workflow implemented through menu and manager classes.\n- workflow_history table records stage changes."}
+{"kind":"slide","id":"sl/7aqfzl","slide":3,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":15}
+{"kind":"textbox","id":"sh/t4jipwr2","slide":3,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/618zehsr","slide":3,"text":"End-to-End Manufacturing Workflow","textPreview":"End-to-End Manufacturing Workflow","textChars":33,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/r2h0nm9c","slide":3,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/g7a1krat","slide":3,"text":"Category","textPreview":"Category","textChars":8,"textLines":1,"bbox":[68,220,142,64]}
+{"kind":"textbox","id":"sh/1sjitwre","slide":3,"text":"Product\nPlanning","textPreview":"Product | Planning","textChars":16,"textLines":2,"bbox":[258,220,142,64]}
+{"kind":"textbox","id":"sh/e5szi1sn","slide":3,"text":"BOM","textPreview":"BOM","textChars":3,"textLines":1,"bbox":[448,220,142,64]}
+{"kind":"textbox","id":"sh/f610rm98","slide":3,"text":"Buy\nDepartment","textPreview":"Buy | Department","textChars":14,"textLines":2,"bbox":[638,220,142,64]}
+{"kind":"textbox","id":"sh/wbqh87ap","slide":3,"text":"Raw Material\nInventory","textPreview":"Raw Material | Inventory","textChars":22,"textLines":2,"bbox":[828,220,142,64]}
+{"kind":"textbox","id":"sh/hczihcra","slide":3,"text":"Production\nOrder","textPreview":"Production | Order","textChars":16,"textLines":2,"bbox":[1018,220,142,64]}
+{"kind":"textbox","id":"sh/tobm54nm","slide":3,"text":"Machine\nAllocation","textPreview":"Machine | Allocation","textChars":18,"textLines":2,"bbox":[1018,420,142,64]}
+{"kind":"textbox","id":"sh/sn2lcz61","slide":3,"text":"Manufacturing","textPreview":"Manufacturing","textChars":13,"textLines":1,"bbox":[828,420,142,64]}
+{"kind":"textbox","id":"sh/rmt43e5g","slide":3,"text":"Quality\nInspection","textPreview":"Quality | Inspection","textChars":18,"textLines":2,"bbox":[638,420,142,64]}
+{"kind":"textbox","id":"sh/6103a9ob","slide":3,"text":"Finished\nGoods","textPreview":"Finished | Goods","textChars":14,"textLines":2,"bbox":[448,420,142,64]}
+{"kind":"textbox","id":"sh/1sbm9ony","slide":3,"text":"Delivery","textPreview":"Delivery","textChars":8,"textLines":1,"bbox":[258,420,142,64]}
+{"kind":"shape","id":"sh/gr2lgj6d","slide":3,"bbox":[210,252,48,0]}
+{"kind":"shape","id":"sh/fqt47e5s","slide":3,"bbox":[400,252,48,0]}
+{"kind":"shape","id":"sh/epk3e9o7","slide":3,"bbox":[590,252,48,0]}
+{"kind":"shape","id":"sh/pwvmdonu","slide":3,"bbox":[780,252,48,0]}
+{"kind":"shape","id":"sh/ovmlk369","slide":3,"bbox":[970,252,48,0]}
+{"kind":"shape","id":"sh/8zu5g7el","slide":3,"bbox":[1089,284,0,136]}
+{"kind":"shape","id":"sh/90369cv6","slide":3,"bbox":[970,452,48,0]}
+{"kind":"shape","id":"sh/mxsnexwf","slide":3,"bbox":[780,452,48,0]}
+{"kind":"shape","id":"sh/nylo72d0","slide":3,"bbox":[590,452,48,0]}
+{"kind":"shape","id":"sh/w3u5k7uh","slide":3,"bbox":[400,452,48,0]}
+{"kind":"shape","id":"sh/x436dcv2","slide":3,"bbox":[780,252,238,200]}
+{"kind":"textbox","id":"sh/a1cnihcr","slide":3,"text":"If inspection fails, a replacement/rework production order is queued again.","textPreview":"If inspection fails, a replacement/rework production order is queued again.","textChars":75,"textLines":1,"bbox":[664,334,480,46]}
+{"kind":"textbox","id":"sh/v2lob2dw","slide":3,"text":"Java | DBMS | Data Structures    3","textPreview":"Java | DBMS | Data Structures    3","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/7aqfzl","slide":3,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- QualityInspectionManager.java\n- ProductionOrderManager.java\n- DeliveryManager.java"}
+{"kind":"slide","id":"sl/7qhe4p","slide":4,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":19}
+{"kind":"textbox","id":"sh/fa98365c","slide":4,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/gb2pwr6x","slide":4,"text":"Main Modules in the Console System","textPreview":"Main Modules in the Console System","textChars":34,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/hcbq5wni","slide":4,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/2dk7y1o3","slide":4,"text":"User and roles","textPreview":"User and roles","textChars":14,"textLines":1,"bbox":[72,202,248,54]}
+{"kind":"textbox","id":"sh/3yt8765o","slide":4,"text":"Login users, workers, creators and access responsibility.","textPreview":"Login users, workers, creators and access responsibility.","textChars":57,"textLines":1,"bbox":[86,272,220,76]}
+{"kind":"textbox","id":"sh/4z2p0b69","slide":4,"text":"Product setup","textPreview":"Product setup","textChars":13,"textLines":1,"bbox":[362,202,248,54]}
+{"kind":"textbox","id":"sh/p0bq9gnu","slide":4,"text":"Categories, products and BOM material requirements.","textPreview":"Categories, products and BOM material requirements.","textChars":51,"textLines":1,"bbox":[376,272,220,76]}
+{"kind":"textbox","id":"sh/q1k72loz","slide":4,"text":"Buy Department","textPreview":"Buy Department","textChars":14,"textLines":1,"bbox":[652,202,248,54]}
+{"kind":"textbox","id":"sh/r2d8bq5k","slide":4,"text":"Single purpose: place raw material purchase entries.","textPreview":"Single purpose: place raw material purchase entries.","textChars":52,"textLines":1,"bbox":[666,272,220,76]}
+{"kind":"textbox","id":"sh/natk3i1w","slide":4,"text":"Inventory","textPreview":"Inventory","textChars":9,"textLines":1,"bbox":[942,202,248,54]}
+{"kind":"textbox","id":"sh/m9kjud0b","slide":4,"text":"Raw material stock, finished goods and stock movements.","textPreview":"Raw material stock, finished goods and stock movements.","textChars":55,"textLines":1,"bbox":[956,272,220,76]}
+{"kind":"textbox","id":"sh/9cv25sj2","slide":4,"text":"Machines","textPreview":"Machines","textChars":8,"textLines":1,"bbox":[72,392,248,54]}
+{"kind":"textbox","id":"sh/obm1wnih","slide":4,"text":"Availability, status and production resource allocation.","textPreview":"Availability, status and production resource allocation.","textChars":56,"textLines":1,"bbox":[86,462,220,76]}
+{"kind":"textbox","id":"sh/z6tkzi10","slide":4,"text":"Production","textPreview":"Production","textChars":10,"textLines":1,"bbox":[362,392,248,54]}
+{"kind":"textbox","id":"sh/e5kjqd0f","slide":4,"text":"Order creation, queue priority, progress and material usage.","textPreview":"Order creation, queue priority, progress and material usage.","textChars":60,"textLines":1,"bbox":[376,462,220,76]}
+{"kind":"textbox","id":"sh/18b218jq","slide":4,"text":"Quality","textPreview":"Quality","textChars":7,"textLines":1,"bbox":[652,392,248,54]}
+{"kind":"textbox","id":"sh/0721sni5","slide":4,"text":"Inspection result, defective quantity and rework flow.","textPreview":"Inspection result, defective quantity and rework flow.","textChars":54,"textLines":1,"bbox":[666,462,220,76]}
+{"kind":"textbox","id":"sh/j2dkb214","slide":4,"text":"Delivery and reports","textPreview":"Delivery and reports","textChars":20,"textLines":1,"bbox":[942,392,248,54]}
+{"kind":"textbox","id":"sh/y14j2x0j","slide":4,"text":"Ship approved goods and generate summary reports.","textPreview":"Ship approved goods and generate summary reports.","textChars":49,"textLines":1,"bbox":[956,462,220,76]}
+{"kind":"textbox","id":"sh/ux8na1kr","slide":4,"text":"Java | DBMS | Data Structures    4","textPreview":"Java | DBMS | Data Structures    4","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/7qhe4p","slide":4,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- menu package classes\n- manager package classes"}
+{"kind":"slide","id":"sl/4mifoi","slide":5,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":23}
+{"kind":"textbox","id":"sh/idwvq587","slide":5,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/5g7ul0ry","slide":5,"text":"Database Schema Backbone","textPreview":"Database Schema Backbone","textChars":24,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/kfydsvqd","slide":5,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/vq5cfq9w","slide":5,"text":"Master Data","textPreview":"Master Data","textChars":11,"textLines":1,"bbox":[80,202,322,56]}
+{"kind":"textbox","id":"sh/apwvml8b","slide":5,"text":"roles","textPreview":"roles","textChars":5,"textLines":1,"bbox":[80,286,322,34]}
+{"kind":"textbox","id":"sh/xcnuh0rm","slide":5,"text":"users","textPreview":"users","textChars":5,"textLines":1,"bbox":[80,332,322,34]}
+{"kind":"textbox","id":"sh/wbedovq1","slide":5,"text":"product_categories","textPreview":"product_categories","textChars":18,"textLines":1,"bbox":[80,378,322,34]}
+{"kind":"textbox","id":"sh/fm9wru90","slide":5,"text":"products","textPreview":"products","textChars":8,"textLines":1,"bbox":[80,424,322,34]}
+{"kind":"textbox","id":"sh/ulgvyp8f","slide":5,"text":"raw_materials","textPreview":"raw_materials","textChars":13,"textLines":1,"bbox":[80,470,322,34]}
+{"kind":"textbox","id":"sh/c3y54fip","slide":5,"text":"product_materials","textPreview":"product_materials","textChars":17,"textLines":1,"bbox":[80,516,322,34]}
+{"kind":"textbox","id":"sh/d47mxkja","slide":5,"text":"Operations","textPreview":"Operations","textChars":10,"textLines":1,"bbox":[470,202,322,56]}
+{"kind":"textbox","id":"sh/q1gn250j","slide":5,"text":"inventory","textPreview":"inventory","textChars":9,"textLines":1,"bbox":[470,286,322,34]}
+{"kind":"textbox","id":"sh/r2p4va14","slide":5,"text":"finished_goods_inventory","textPreview":"finished_goods_inventory","textChars":24,"textLines":1,"bbox":[470,332,322,34]}
+{"kind":"textbox","id":"sh/4fy50vid","slide":5,"text":"material_transactions","textPreview":"material_transactions","textChars":21,"textLines":1,"bbox":[470,378,322,34]}
+{"kind":"textbox","id":"sh/pg7mt0jy","slide":5,"text":"production_orders","textPreview":"production_orders","textChars":17,"textLines":1,"bbox":[470,424,322,34]}
+{"kind":"textbox","id":"sh/2dg3yl0n","slide":5,"text":"machines","textPreview":"machines","textChars":8,"textLines":1,"bbox":[470,470,322,34]}
+{"kind":"textbox","id":"sh/3ep4rq1s","slide":5,"text":"worker_assignments","textPreview":"worker_assignments","textChars":18,"textLines":1,"bbox":[470,516,322,34]}
+{"kind":"textbox","id":"sh/gbelwvih","slide":5,"text":"Control and Output","textPreview":"Control and Output","textChars":18,"textLines":1,"bbox":[860,202,322,56]}
+{"kind":"textbox","id":"sh/hcnmpgj2","slide":5,"text":"production_material_usage","textPreview":"production_material_usage","textChars":25,"textLines":1,"bbox":[860,286,322,34]}
+{"kind":"textbox","id":"sh/x8f2tcbq","slide":5,"text":"workflow_history","textPreview":"workflow_history","textChars":16,"textLines":1,"bbox":[860,332,322,34]}
+{"kind":"textbox","id":"sh/w76l07u5","slide":5,"text":"quality_inspections","textPreview":"quality_inspections","textChars":19,"textLines":1,"bbox":[860,378,322,34]}
+{"kind":"textbox","id":"sh/v6xkr2tk","slide":5,"text":"deliveries","textPreview":"deliveries","textChars":10,"textLines":1,"bbox":[860,424,322,34]}
+{"kind":"textbox","id":"sh/a5ojyhcf","slide":5,"text":"16 normalized tables support the workflow from product planning to delivery.","textPreview":"16 normalized tables support the workflow from product planning to delivery.","textChars":76,"textLines":1,"bbox":[80,590,880,34]}
+{"kind":"textbox","id":"sh/94f2pcbu","slide":5,"text":"Java | DBMS | Data Structures    5","textPreview":"Java | DBMS | Data Structures    5","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/4mifoi","slide":5,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- database/DatabaseInitializer.java creates the schema.\n- database/DatabaseSeeder.java adds PC manufacturing seed data."}
+{"kind":"slide","id":"sl/bt6doh","slide":6,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":7}
+{"kind":"textbox","id":"sh/ne9srih8","slide":6,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/ofi90nit","slide":6,"text":"DBMS Concepts Demonstrated","textPreview":"DBMS Concepts Demonstrated","textChars":26,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/pgbat8ze","slide":6,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/ep0rut0r","slide":6,"text":"Constraints and relationships","textPreview":"Constraints and relationships","textChars":29,"textLines":1,"bbox":[82,198,500,56]}
+{"kind":"textbox","id":"sh/fa98nyhw","slide":6,"text":"- Primary keys for every entity\n- Foreign keys between products, BOM, orders, workers and inspections\n- UNIQUE constraints for usernames, category names, material names and order numbers\n- NOT NULL fields for required business data\n- CHECK rules for stock levels, quantities, status and prices","textPreview":"- Primary keys for every entity | - Foreign keys between products, BOM, orders, workers and inspections | - UNIQUE constraints for userna...","textChars":293,"textLines":5,"bbox":[104,278,456,220]}
+{"kind":"textbox","id":"sh/0bi9w3ih","slide":6,"text":"Query concepts","textPreview":"Query concepts","textChars":14,"textLines":1,"bbox":[696,198,500,56]}
+{"kind":"textbox","id":"sh/1crqp8z2","slide":6,"text":"- CRUD in every major module\n- JOIN queries for readable reports\n- GROUP BY and HAVING for summary reports\n- Subqueries for filtered operational views\n- Database metadata and result-set metadata examples","textPreview":"- CRUD in every major module | - JOIN queries for readable reports | - GROUP BY and HAVING for summary reports | - Subqueries for filtere...","textChars":203,"textLines":5,"bbox":[718,278,456,220]}
+{"kind":"textbox","id":"sh/qlgrqt0f","slide":6,"text":"Java | DBMS | Data Structures    6","textPreview":"Java | DBMS | Data Structures    6","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/bt6doh","slide":6,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- database/DatabaseInitializer.java\n- manager/ReportManager.java\n- menu/WorkflowConceptMenu.java"}
+{"kind":"slide","id":"sl/87g5n1","slide":7,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":16}
+{"kind":"textbox","id":"sh/id4jml4v","slide":7,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/5gvix0n6","slide":7,"text":"Transactions, Procedures and ACID","textPreview":"Transactions, Procedures and ACID","textChars":33,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/4fm1ovml","slide":7,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/vat0r654","slide":7,"text":"SAVEPOINT","textPreview":"SAVEPOINT","textChars":9,"textLines":1,"bbox":[86,190,220,50]}
+{"kind":"textbox","id":"sh/upkzi14j","slide":7,"text":"Protects multi-step operations before stock is consumed.","textPreview":"Protects multi-step operations before stock is consumed.","textChars":56,"textLines":1,"bbox":[330,196,270,54]}
+{"kind":"textbox","id":"sh/hcvitgna","slide":7,"text":"COMMIT","textPreview":"COMMIT","textChars":6,"textLines":1,"bbox":[86,322,220,50]}
+{"kind":"textbox","id":"sh/wbmhkbmp","slide":7,"text":"Finalizes successful order, inspection or delivery changes.","textPreview":"Finalizes successful order, inspection or delivery changes.","textChars":59,"textLines":1,"bbox":[330,328,270,54]}
+{"kind":"textbox","id":"sh/f6x03al8","slide":7,"text":"ROLLBACK","textPreview":"ROLLBACK","textChars":8,"textLines":1,"bbox":[86,454,220,50]}
+{"kind":"textbox","id":"sh/e5oju543","slide":7,"text":"Restores database state when a workflow step fails.","textPreview":"Restores database state when a workflow step fails.","textChars":51,"textLines":1,"bbox":[330,460,270,54]}
+{"kind":"textbox","id":"sh/4rahorut","slide":7,"text":"Trigger","textPreview":"Trigger","textChars":7,"textLines":1,"bbox":[688,190,220,50]}
+{"kind":"textbox","id":"sh/ps3yxwbe","slide":7,"text":"Automatically records audit-style workflow changes.","textPreview":"Automatically records audit-style workflow changes.","textChars":51,"textLines":1,"bbox":[932,196,270,54]}
+{"kind":"textbox","id":"sh/25szmhcn","slide":7,"text":"Stored procedure","textPreview":"Stored procedure","textChars":16,"textLines":1,"bbox":[688,322,220,50]}
+{"kind":"textbox","id":"sh/3q1gvmt8","slide":7,"text":"CallableStatement runs database-side workflow operations.","textPreview":"CallableStatement runs database-side workflow operations.","textChars":57,"textLines":1,"bbox":[932,328,270,54]}
+{"kind":"textbox","id":"sh/g3ahk7uh","slide":7,"text":"Stored function","textPreview":"Stored function","textChars":15,"textLines":1,"bbox":[688,454,220,50]}
+{"kind":"textbox","id":"sh/h4jytcb2","slide":7,"text":"Returns calculated values used by reports or checks.","textPreview":"Returns calculated values used by reports or checks.","textChars":52,"textLines":1,"bbox":[932,460,270,54]}
+{"kind":"textbox","id":"sh/u1szihcr","slide":7,"text":"ACID in this project: order, material consumption, inspection and delivery updates are treated as one reliable unit of work.","textPreview":"ACID in this project: order, material consumption, inspection and delivery updates are treated as one reliable unit of work.","textChars":124,"textLines":1,"bbox":[104,596,1068,50]}
+{"kind":"textbox","id":"sh/f21grmtw","slide":7,"text":"Java | DBMS | Data Structures    7","textPreview":"Java | DBMS | Data Structures    7","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/87g5n1","slide":7,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- manager/ProductionOrderManager.java\n- manager/QualityInspectionManager.java\n- manager/DeliveryManager.java\n- database/DatabaseInitializer.java"}
+{"kind":"slide","id":"sl/ghp87e","slide":8,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":23}
+{"kind":"textbox","id":"sh/rqtcnmxo","slide":8,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/sr2dwre9","slide":8,"text":"Java Concepts Used","textPreview":"Java Concepts Used","textChars":18,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/dcbupwfu","slide":8,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/edkvyhwf","slide":8,"text":"Abstract class","textPreview":"Abstract class","textChars":14,"textLines":1,"bbox":[72,186,220,42]}
+{"kind":"textbox","id":"sh/fetcrmx0","slide":8,"text":"Shared workflow/report behavior","textPreview":"Shared workflow/report behavior","textChars":31,"textLines":1,"bbox":[310,193,292,36]}
+{"kind":"textbox","id":"sh/0fmd0rel","slide":8,"text":"Interface","textPreview":"Interface","textChars":9,"textLines":1,"bbox":[647,186,220,42]}
+{"kind":"textbox","id":"sh/1gvutwv6","slide":8,"text":"Common service contracts","textPreview":"Common service contracts","textChars":24,"textLines":1,"bbox":[885,193,292,36]}
+{"kind":"textbox","id":"sh/uh0bmxwb","slide":8,"text":"Lambda + Predicate","textPreview":"Lambda + Predicate","textChars":18,"textLines":1,"bbox":[72,272,220,42]}
+{"kind":"textbox","id":"sh/vi9cf2xg","slide":8,"text":"Filtering active records and validations","textPreview":"Filtering active records and validations","textChars":40,"textLines":1,"bbox":[310,279,292,36]}
+{"kind":"textbox","id":"sh/fqlcve10","slide":8,"text":"Custom exception","textPreview":"Custom exception","textChars":16,"textLines":1,"bbox":[647,272,220,42]}
+{"kind":"textbox","id":"sh/upcb290f","slide":8,"text":"Readable business-rule errors","textPreview":"Readable business-rule errors","textChars":29,"textLines":1,"bbox":[885,279,292,36]}
+{"kind":"textbox","id":"sh/hs3ux4jq","slide":8,"text":"HashMap / HashSet","textPreview":"HashMap / HashSet","textChars":17,"textLines":1,"bbox":[72,358,220,42]}
+{"kind":"textbox","id":"sh/grut4zi5","slide":8,"text":"Fast lookup and duplicate prevention","textPreview":"Fast lookup and duplicate prevention","textChars":36,"textLines":1,"bbox":[310,365,292,36]}
+{"kind":"textbox","id":"sh/721cru1o","slide":8,"text":"Vector","textPreview":"Vector","textChars":6,"textLines":1,"bbox":[647,358,220,42]}
+{"kind":"textbox","id":"sh/61sbypk3","slide":8,"text":"Legacy synchronized collection example","textPreview":"Legacy synchronized collection example","textChars":38,"textLines":1,"bbox":[885,365,292,36]}
+{"kind":"textbox","id":"sh/t43ut4ju","slide":8,"text":"File IO","textPreview":"File IO","textChars":7,"textLines":1,"bbox":[72,444,220,42]}
+{"kind":"textbox","id":"sh/s3ut0z29","slide":8,"text":"Report export with readers and writers","textPreview":"Report export with readers and writers","textChars":38,"textLines":1,"bbox":[310,451,292,36]}
+{"kind":"textbox","id":"sh/jy1snu1s","slide":8,"text":"DateTimeFormatter","textPreview":"DateTimeFormatter","textChars":17,"textLines":1,"bbox":[647,444,220,42]}
+{"kind":"textbox","id":"sh/ixsbupk7","slide":8,"text":"Human-readable timestamps","textPreview":"Human-readable timestamps","textChars":25,"textLines":1,"bbox":[885,451,292,36]}
+{"kind":"textbox","id":"sh/mt8v6p4z","slide":8,"text":"Synchronization","textPreview":"Synchronization","textChars":15,"textLines":1,"bbox":[72,530,220,42]}
+{"kind":"textbox","id":"sh/nuhczalk","slide":8,"text":"Protects shared workflow operations","textPreview":"Protects shared workflow operations","textChars":35,"textLines":1,"bbox":[310,537,292,36]}
+{"kind":"textbox","id":"sh/8vqd8fm5","slide":8,"text":"CallableStatement","textPreview":"CallableStatement","textChars":17,"textLines":1,"bbox":[647,530,220,42]}
+{"kind":"textbox","id":"sh/9wju1k3q","slide":8,"text":"Calls stored procedures/functions","textPreview":"Calls stored procedures/functions","textChars":33,"textLines":1,"bbox":[885,537,292,36]}
+{"kind":"textbox","id":"sh/axsvap4b","slide":8,"text":"Java | DBMS | Data Structures    8","textPreview":"Java | DBMS | Data Structures    8","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/ghp87e","slide":8,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- menu/WorkflowConceptMenu.java\n- manager package\n- utils/ConsoleFormatter.java\n- exceptions package"}
+{"kind":"slide","id":"sl/vxplwy","slide":9,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":12}
+{"kind":"textbox","id":"sh/4zyt4nyt","slide":9,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/3ypsbix8","slide":9,"text":"Object-Oriented Design","textPreview":"Object-Oriented Design","textChars":22,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/2xgr2dgn","slide":9,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/hwna9sf2","slide":9,"text":"Model","textPreview":"Model","textChars":5,"textLines":1,"bbox":[104,210,220,54]}
+{"kind":"textbox","id":"sh/gve90nyh","slide":9,"text":"Product, User, RawMaterial, Inventory and ProductionOrder store entity data.","textPreview":"Product, User, RawMaterial, Inventory and ProductionOrder store entity data.","textChars":76,"textLines":1,"bbox":[360,219,720,42]}
+{"kind":"textbox","id":"sh/fu5s7ixc","slide":9,"text":"Manager","textPreview":"Manager","textChars":7,"textLines":1,"bbox":[104,302,220,54]}
+{"kind":"textbox","id":"sh/u9wrydgr","slide":9,"text":"Business rules: create orders, consume stock, inspect quality and deliver goods.","textPreview":"Business rules: create orders, consume stock, inspect quality and deliver goods.","textChars":80,"textLines":1,"bbox":[360,311,720,42]}
+{"kind":"shape","id":"sh/1sralcfm","slide":9,"bbox":[214,264,0,38]}
+{"kind":"textbox","id":"sh/0ritc7e1","slide":9,"text":"Menu","textPreview":"Menu","textChars":4,"textLines":1,"bbox":[104,394,220,54]}
+{"kind":"textbox","id":"sh/a9sfeho3","slide":9,"text":"Console interaction layer that calls manager methods.","textPreview":"Console interaction layer that calls manager methods.","textChars":53,"textLines":1,"bbox":[360,403,720,42]}
+{"kind":"shape","id":"sh/bu1gnmpo","slide":9,"bbox":[214,356,0,38]}
+{"kind":"textbox","id":"sh/cvuxgr69","slide":9,"text":"Database","textPreview":"Database","textChars":8,"textLines":1,"bbox":[104,486,220,54]}
+{"kind":"textbox","id":"sh/xw3ypw7u","slide":9,"text":"Connection, initializer, seed data and SQL workflow objects.","textPreview":"Connection, initializer, seed data and SQL workflow objects.","textChars":60,"textLines":1,"bbox":[360,495,720,42]}
+{"kind":"shape","id":"sh/25sfaho7","slide":9,"bbox":[214,448,0,38]}
+{"kind":"textbox","id":"sh/n61wjmps","slide":9,"text":"Separation of concerns makes the project easier to test, extend and explain.","textPreview":"Separation of concerns makes the project easier to test, extend and explain.","textChars":76,"textLines":1,"bbox":[104,594,900,36]}
+{"kind":"textbox","id":"sh/o7axc76d","slide":9,"text":"Java | DBMS | Data Structures    9","textPreview":"Java | DBMS | Data Structures    9","textChars":34,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/vxplwy","slide":9,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- model package\n- manager package\n- menu package\n- database package"}
+{"kind":"slide","id":"sl/860c1h","slide":10,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":27}
+{"kind":"textbox","id":"sh/gfi1one1","slide":10,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/ve9kvidg","slide":10,"text":"Data Structures Package","textPreview":"Data Structures Package","textChars":23,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/utgjmdwv","slide":10,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/pkr21cvy","slide":10,"text":"LinkedList","textPreview":"LinkedList","textChars":10,"textLines":1,"bbox":[70,184,190,36]}
+{"kind":"textbox","id":"sh/4ji1s7ud","slide":10,"text":"Production history / waiting list","textPreview":"Production history / waiting list","textChars":33,"textLines":1,"bbox":[282,189,330,28]}
+{"kind":"textbox","id":"sh/3i9kz2ds","slide":10,"text":"Insert, delete first, delete last, delete specific node","textPreview":"Insert, delete first, delete last, delete specific node","textChars":55,"textLines":1,"bbox":[650,189,520,28]}
+{"kind":"textbox","id":"sh/ih0jqxc7","slide":10,"text":"Stack","textPreview":"Stack","textChars":5,"textLines":1,"bbox":[70,236,190,36]}
+{"kind":"textbox","id":"sh/lo7ip8ve","slide":10,"text":"Workflow undo","textPreview":"Workflow undo","textChars":13,"textLines":1,"bbox":[282,241,330,28]}
+{"kind":"textbox","id":"sh/kny1g3et","slide":10,"text":"Push, pop, peek, display","textPreview":"Push, pop, peek, display","textChars":24,"textLines":1,"bbox":[650,241,520,28]}
+{"kind":"textbox","id":"sh/6pofix8r","slide":10,"text":"Queue","textPreview":"Queue","textChars":5,"textLines":1,"bbox":[70,288,190,36]}
+{"kind":"textbox","id":"sh/7qxgb2pc","slide":10,"text":"FIFO production steps","textPreview":"FIFO production steps","textChars":21,"textLines":1,"bbox":[282,293,330,28]}
+{"kind":"textbox","id":"sh/sr6hk7qx","slide":10,"text":"Enqueue, dequeue, front","textPreview":"Enqueue, dequeue, front","textChars":23,"textLines":1,"bbox":[650,293,520,28]}
+{"kind":"textbox","id":"sh/tsfydc7i","slide":10,"text":"PriorityQueue","textPreview":"PriorityQueue","textChars":13,"textLines":1,"bbox":[70,340,190,36]}
+{"kind":"textbox","id":"sh/etozmh83","slide":10,"text":"Urgent production orders","textPreview":"Urgent production orders","textChars":24,"textLines":1,"bbox":[282,345,330,28]}
+{"kind":"textbox","id":"sh/fuhgfmpo","slide":10,"text":"Add by priority, remove highest priority","textPreview":"Add by priority, remove highest priority","textChars":40,"textLines":1,"bbox":[650,345,520,28]}
+{"kind":"textbox","id":"sh/gvqho7qt","slide":10,"text":"HashMap","textPreview":"HashMap","textChars":7,"textLines":1,"bbox":[70,392,190,36]}
+{"kind":"textbox","id":"sh/1wzyhc7e","slide":10,"text":"Fast product or machine lookup","textPreview":"Fast product or machine lookup","textChars":30,"textLines":1,"bbox":[282,397,330,28]}
+{"kind":"textbox","id":"sh/2h8zqhoz","slide":10,"text":"Put, get, remove, search","textPreview":"Put, get, remove, search","textChars":24,"textLines":1,"bbox":[650,397,520,28]}
+{"kind":"textbox","id":"sh/3ihgjmpk","slide":10,"text":"HashSet","textPreview":"HashSet","textChars":7,"textLines":1,"bbox":[70,444,190,36]}
+{"kind":"textbox","id":"sh/zm1g7m5s","slide":10,"text":"Avoid duplicate IDs/names","textPreview":"Avoid duplicate IDs/names","textChars":25,"textLines":1,"bbox":[282,449,330,28]}
+{"kind":"textbox","id":"sh/ylsfeh47","slide":10,"text":"Add, remove, contains","textPreview":"Add, remove, contains","textChars":21,"textLines":1,"bbox":[650,449,520,28]}
+{"kind":"textbox","id":"sh/lojy9wny","slide":10,"text":"Vector","textPreview":"Vector","textChars":6,"textLines":1,"bbox":[70,496,190,36]}
+{"kind":"textbox","id":"sh/0naxgrmd","slide":10,"text":"Synchronized dynamic list example","textPreview":"Synchronized dynamic list example","textChars":33,"textLines":1,"bbox":[282,501,330,28]}
+{"kind":"textbox","id":"sh/bihw3m5g","slide":10,"text":"Add, get, update, delete","textPreview":"Add, get, update, delete","textChars":24,"textLines":1,"bbox":[650,501,520,28]}
+{"kind":"textbox","id":"sh/qx8fah4b","slide":10,"text":"BST","textPreview":"BST","textChars":3,"textLines":1,"bbox":[70,548,190,36]}
+{"kind":"textbox","id":"sh/dkzy5cnm","slide":10,"text":"Sorted searchable catalog","textPreview":"Sorted searchable catalog","textChars":25,"textLines":1,"bbox":[282,553,330,28]}
+{"kind":"textbox","id":"sh/cjqxcrm1","slide":10,"text":"Insert, search, inorder traversal","textPreview":"Insert, search, inorder traversal","textChars":33,"textLines":1,"bbox":[650,553,520,28]}
+{"kind":"textbox","id":"sh/3uhwz25k","slide":10,"text":"Java | DBMS | Data Structures    10","textPreview":"Java | DBMS | Data Structures    10","textChars":35,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/860c1h","slide":10,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- DSA/LinkedList.java\n- DSA/Stack.java\n- DSA/Queue.java\n- DSA/PriorityQueue.java\n- DSA/HashMap.java\n- DSA/HashSet.java\n- DSA/Vector.java\n- DSA/BinarySearchTree.java"}
+{"kind":"slide","id":"sl/k2ddgc","slide":11,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":8}
+{"kind":"textbox","id":"sh/rq9czepk","slide":11,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/sritsjq5","slide":11,"text":"DSA Inside the Workflow","textPreview":"DSA Inside the Workflow","textChars":23,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/dsru1o7q","slide":11,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/il0bm983","slide":11,"text":"PriorityQueue\nurgent orders first","textPreview":"PriorityQueue | urgent orders first","textChars":33,"textLines":2,"bbox":[94,230,210,84]}
+{"kind":"textbox","id":"sh/3m9cvepo","slide":11,"text":"Queue\nnormal order flow","textPreview":"Queue | normal order flow","textChars":23,"textLines":2,"bbox":[382,230,210,84]}
+{"kind":"textbox","id":"sh/4nitojq9","slide":11,"text":"Stack\nundo last step","textPreview":"Stack | undo last step","textChars":20,"textLines":2,"bbox":[670,230,210,84]}
+{"kind":"textbox","id":"sh/5oruxo7u","slide":11,"text":"LinkedList\nworkflow history","textPreview":"LinkedList | workflow history","textChars":27,"textLines":2,"bbox":[958,230,210,84]}
+{"kind":"shape","id":"sh/uxgbip87","slide":11,"bbox":[304,272,78,0]}
+{"kind":"shape","id":"sh/vypcrups","slide":11,"bbox":[592,272,78,0]}
+{"kind":"shape","id":"sh/rilcvq9w","slide":11,"bbox":[880,272,78,0]}
+{"kind":"textbox","id":"sh/qhcbmlsb","slide":11,"text":"Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.","textPreview":"Hashing supports fast lookup for products, raw materials and machines. BST gives sorted/searchable catalog behavior for demonstration.","textChars":134,"textLines":1,"bbox":[160,432,960,78]}
+{"kind":"textbox","id":"sh/dk3ux0r2","slide":11,"text":"Java | DBMS | Data Structures    11","textPreview":"Java | DBMS | Data Structures    11","textChars":35,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/k2ddgc","slide":11,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- menu/ProductionQueueMenu.java\n- manager/ProductionQueueManager.java\n- DSA package"}
+{"kind":"slide","id":"sl/a6klc0","slide":12,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":10}
+{"kind":"textbox","id":"sh/nadkb25w","slide":12,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/obmlkn6h","slide":12,"text":"Quality Inspection and Rework Logic","textPreview":"Quality Inspection and Rework Logic","textChars":35,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/pcv2dsn2","slide":12,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/el43edof","slide":12,"text":"Manufactured\nProduct","textPreview":"Manufactured | Product","textChars":20,"textLines":2,"bbox":[120,260,190,74]}
+{"kind":"textbox","id":"sh/fmdk7i50","slide":12,"text":"Quality\nInspection","textPreview":"Quality | Inspection","textChars":18,"textLines":2,"bbox":[418,260,190,74]}
+{"kind":"textbox","id":"sh/0nmlgn6l","slide":12,"text":"Approved","textPreview":"Approved","textChars":8,"textLines":1,"bbox":[742,190,170,58]}
+{"kind":"textbox","id":"sh/1ov29sn6","slide":12,"text":"Defective","textPreview":"Defective","textChars":9,"textLines":1,"bbox":[742,342,170,58]}
+{"kind":"textbox","id":"sh/yho3qhoj","slide":12,"text":"Finished Goods\nInventory","textPreview":"Finished Goods | Inventory","textChars":24,"textLines":2,"bbox":[1000,190,190,58]}
+{"kind":"textbox","id":"sh/zix4jm54","slide":12,"text":"Replacement\nOrder","textPreview":"Replacement | Order","textChars":17,"textLines":2,"bbox":[1000,342,190,58]}
+{"kind":"shape","id":"sh/ra9srex0","slide":12,"bbox":[310,297,108,0]}
+{"kind":"shape","id":"sh/q90bi9wf","slide":12,"bbox":[608,219,134,78]}
+{"kind":"shape","id":"sh/dcratofq","slide":12,"bbox":[912,219,88,0]}
+{"kind":"shape","id":"sh/cbitkjel","slide":12,"bbox":[608,297,134,74]}
+{"kind":"shape","id":"sh/zytsvyxw","slide":12,"bbox":[912,371,88,0]}
+{"kind":"shape","id":"sh/exkbmtwb","slide":12,"bbox":[310,297,690,115]}
+{"kind":"textbox","id":"sh/10baxof2","slide":12,"text":"Business rule: good quantity enters finished goods; defective quantity is tracked and can create a new manufacturing order.","textPreview":"Business rule: good quantity enters finished goods; defective quantity is tracked and can create a new manufacturing order.","textChars":123,"textLines":1,"bbox":[136,522,970,58]}
+{"kind":"textbox","id":"sh/0z2to3eh","slide":12,"text":"Java | DBMS | Data Structures    12","textPreview":"Java | DBMS | Data Structures    12","textChars":35,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/a6klc0","slide":12,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- manager/QualityInspectionManager.java\n- quality_inspections table\n- finished_goods_inventory table"}
+{"kind":"slide","id":"sl/rf00kk","slide":13,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":9}
+{"kind":"textbox","id":"sh/c7u90be5","slide":13,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/r6l8r6dk","slide":13,"text":"Delivery and Reporting","textPreview":"Delivery and Reporting","textChars":22,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/q5cry1wz","slide":13,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/lwnaxgvm","slide":13,"text":"Deliver order","textPreview":"Deliver order","textChars":13,"textLines":1,"bbox":[100,206,240,70]}
+{"kind":"textbox","id":"sh/0ve94be1","slide":13,"text":"Select an approved/completed production order, confirm quantity and record customer/location details.","textPreview":"Select an approved/completed production order, confirm quantity and record customer/location details.","textChars":101,"textLines":1,"bbox":[102,306,430,82]}
+{"kind":"textbox","id":"sh/zu58vqdg","slide":13,"text":"Database updates","textPreview":"Database updates","textChars":16,"textLines":1,"bbox":[548,206,260,70]}
+{"kind":"textbox","id":"sh/e9wr2lwb","slide":13,"text":"- Finished goods stock decreases\n- Delivery record is inserted\n- Production order becomes DELIVERED\n- Workflow history receives an entry","textPreview":"- Finished goods stock decreases | - Delivery record is inserted | - Production order becomes DELIVERED | - Workflow history receives an ...","textChars":136,"textLines":4,"bbox":[558,306,370,150]}
+{"kind":"textbox","id":"sh/h0jqlwvi","slide":13,"text":"Reports","textPreview":"Reports","textChars":7,"textLines":1,"bbox":[948,206,220,70]}
+{"kind":"textbox","id":"sh/gza9srex","slide":13,"text":"Production, inventory, quality and delivery reports help management review performance.","textPreview":"Production, inventory, quality and delivery reports help management review performance.","textChars":87,"textLines":1,"bbox":[944,306,238,112]}
+{"kind":"textbox","id":"sh/qhobatoz","slide":13,"text":"Java | DBMS | Data Structures    13","textPreview":"Java | DBMS | Data Structures    13","textChars":35,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/rf00kk","slide":13,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- manager/DeliveryManager.java\n- menu/DeliveryMenu.java\n- manager/ReportManager.java"}
+{"kind":"slide","id":"sl/zq6kvk","slide":14,"title":"MANUFACTURING WORKFLOW MANAGEMENT","textShapes":8}
+{"kind":"textbox","id":"sh/hsrepwby","slide":14,"text":"MANUFACTURING WORKFLOW MANAGEMENT","textPreview":"MANUFACTURING WORKFLOW MANAGEMENT","textChars":33,"textLines":1,"bbox":[64,36,600,26]}
+{"kind":"textbox","id":"sh/up0fehsn","slide":14,"text":"Demo Flow and Future Scope","textPreview":"Demo Flow and Future Scope","textChars":26,"textLines":1,"bbox":[64,72,1030,64]}
+{"kind":"shape","id":"sh/vq9wnmt8","slide":14,"bbox":[64,146,1152,0]}
+{"kind":"textbox","id":"sh/83yxc7ah","slide":14,"text":"Suggested demo path","textPreview":"Suggested demo path","textChars":19,"textLines":1,"bbox":[82,198,500,58]}
+{"kind":"textbox","id":"sh/torelcb2","slide":14,"text":"- Add category and product\n- Create BOM with raw materials\n- Buy missing raw material\n- Check inventory and create production order\n- Assign machine and worker\n- Inspect quality, update finished goods, deliver order","textPreview":"- Add category and product | - Create BOM with raw materials | - Buy missing raw material | - Check inventory and create production order...","textChars":215,"textLines":6,"bbox":[104,280,448,226]}
+{"kind":"textbox","id":"sh/61gfaxsb","slide":14,"text":"Future improvements","textPreview":"Future improvements","textChars":19,"textLines":1,"bbox":[696,198,500,58]}
+{"kind":"textbox","id":"sh/72pwj2tw","slide":14,"text":"- Customer order module\n- Barcode based material receiving\n- Graphical dashboard\n- Predictive machine maintenance\n- Stronger password and session controls\n- Supplier comparison reports","textPreview":"- Customer order module | - Barcode based material receiving | - Graphical dashboard | - Predictive machine maintenance | - Stronger pass...","textChars":184,"textLines":6,"bbox":[718,280,448,226]}
+{"kind":"textbox","id":"sh/kzyx87u5","slide":14,"text":"Conclusion: the project is a practical mini-ERP for PC manufacturing, built around database-backed workflow control.","textPreview":"Conclusion: the project is a practical mini-ERP for PC manufacturing, built around database-backed workflow control.","textChars":116,"textLines":1,"bbox":[112,596,1056,50]}
+{"kind":"textbox","id":"sh/l07ehcbq","slide":14,"text":"Java | DBMS | Data Structures    14","textPreview":"Java | DBMS | Data Structures    14","textChars":35,"textLines":1,"bbox":[64,674,500,24]}
+{"kind":"notes","id":"nt/zq6kvk","slide":14,"text":"[Sources]\nLocal project source code in C:\\Programming\\SEM2\\ManufacturingWorkFlowManagement\\src.\n- Current project modules and final workflow requested by the user."}

@@ -22,7 +22,8 @@ public class ReportMenu {
             System.out.println("2. Low Stock Report");
             System.out.println("3. Production Order Report");
             System.out.println("4. Finished Goods Report");
-            System.out.println("5. Export Monthly Report");
+            System.out.println("5. Delivery Report");
+            System.out.println("6. Export Monthly Report");
             System.out.println("0. Back");
 
             System.out.print("Choice: ");
@@ -50,7 +51,9 @@ public class ReportMenu {
 
                 case 4 -> ReportManager.finishedGoodsReport();
 
-                case 5 -> {
+                case 5 -> ReportManager.deliveryReport();
+
+                case 6 -> {
 
                     System.out.print("Enter Month (1-12): ");
                     int month = Integer.parseInt(scanner.nextLine());

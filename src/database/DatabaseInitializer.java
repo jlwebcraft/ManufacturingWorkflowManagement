@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class DatabaseInitializer {
 
-    public static void initializeDatabase() {
+    public static boolean initializeDatabase() {
 
         try {
 
@@ -50,10 +50,12 @@ public class DatabaseInitializer {
             System.out.println("-----------------------------------");
             System.out.println("All tables created and seeded successfully.");
             System.out.println("-----------------------------------");
+            return true;
 
         } catch (SQLException e) {
 
             e.printStackTrace();
+            return false;
 
         }
 
@@ -201,7 +203,7 @@ public class DatabaseInitializer {
                     deadline DATE,
                     production_start DATETIME,
                     production_end DATETIME,
-                    status ENUM('PENDING', 'IN_PROGRESS', 'CREATED', 'MATERIAL_ALLOCATED', 'IN_PRODUCTION', 'QUALITY_CHECK', 'PACKAGING', 'COMPLETED', 'CANCELLED') DEFAULT 'PENDING',
+                    status ENUM('PENDING', 'IN_PROGRESS', 'CREATED', 'MATERIAL_ALLOCATED', 'IN_PRODUCTION', 'QUALITY_CHECK', 'PACKAGING', 'COMPLETED', 'DELIVERED', 'CANCELLED') DEFAULT 'PENDING',
                     created_by INT NOT NULL,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (product_id) REFERENCES products(product_id),
@@ -289,10 +291,29 @@ public class DatabaseInitializer {
         System.out.println("finished_goods_inventory table ready.");
     }
 
+    private static void createDeliveriesTable(Statement statement) throws SQLException {
+        statement.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS deliveries (
+                    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+                    order_id INT UNIQUE NOT NULL,
+                    delivered_by INT NOT NULL,
+                    delivered_quantity INT NOT NULL CHECK (delivered_quantity > 0),
+                    delivered_to VARCHAR(100) NOT NULL,
+                    delivery_address VARCHAR(255),
+                    delivery_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    remarks TEXT,
+                    FOREIGN KEY (order_id) REFERENCES production_orders(order_id),
+                    FOREIGN KEY (delivered_by) REFERENCES users(user_id)
+                )
+                """);
+        System.out.println("deliveries table ready.");
+    }
+
     private static void repairExistingSchema(Connection connection, Statement statement) throws SQLException {
         ensureInventoryNameColumn(connection, statement);
         ensureMachineSchema(connection, statement);
         ensureFinishedGoodsSchema(statement);
+        ensureDeliveriesSchema(statement);
         ensureProductionOrderStatusValues(statement);
     }
 
@@ -354,10 +375,27 @@ public class DatabaseInitializer {
                 """);
     }
 
+    private static void ensureDeliveriesSchema(Statement statement) throws SQLException {
+        statement.executeUpdate("""
+                CREATE TABLE IF NOT EXISTS deliveries (
+                    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+                    order_id INT UNIQUE NOT NULL,
+                    delivered_by INT NOT NULL,
+                    delivered_quantity INT NOT NULL CHECK (delivered_quantity > 0),
+                    delivered_to VARCHAR(100) NOT NULL,
+                    delivery_address VARCHAR(255),
+                    delivery_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    remarks TEXT,
+                    FOREIGN KEY (order_id) REFERENCES production_orders(order_id),
+                    FOREIGN KEY (delivered_by) REFERENCES users(user_id)
+                )
+                """);
+    }
+
     private static void ensureProductionOrderStatusValues(Statement statement) throws SQLException {
         statement.executeUpdate("""
                 ALTER TABLE production_orders
-                MODIFY status ENUM('PENDING', 'IN_PROGRESS', 'CREATED', 'MATERIAL_ALLOCATED', 'IN_PRODUCTION', 'QUALITY_CHECK', 'PACKAGING', 'COMPLETED', 'CANCELLED') DEFAULT 'PENDING'
+                MODIFY status ENUM('PENDING', 'IN_PROGRESS', 'CREATED', 'MATERIAL_ALLOCATED', 'IN_PRODUCTION', 'QUALITY_CHECK', 'PACKAGING', 'COMPLETED', 'DELIVERED', 'CANCELLED') DEFAULT 'PENDING'
                 """);
     }
 
@@ -465,5 +503,6 @@ public class DatabaseInitializer {
         createWorkflowHistoryTable(statement);
         createQualityInspectionsTable(statement);
         createFinishedGoodsInventoryTable(statement);
+        createDeliveriesTable(statement);
     }
 }

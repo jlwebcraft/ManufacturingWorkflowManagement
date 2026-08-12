@@ -25,8 +25,8 @@ public class MainMenu {
             System.out.println("8. Production Orders");
             System.out.println("9. Production Queue");
             System.out.println("10. Quality Inspection");
-            System.out.println("11. Reports");
-            System.out.println("12. Java / DSA / DBMS Practice");
+            System.out.println("11. Delivery");
+            System.out.println("12. Reports");
             System.out.println("0. Logout");
             System.out.println();
 
@@ -66,9 +66,9 @@ public class MainMenu {
 
                 case 10 -> QualityInspectionMenu.showMenu();
 
-                case 11 -> ReportMenu.showMenu();
+                case 11 -> DeliveryMenu.showMenu();
 
-                case 12 -> WorkflowConceptMenu.showMenu();
+                case 12 -> ReportMenu.showMenu();
 
                 case 0 -> {
                     System.out.println("Logged Out Successfully.");

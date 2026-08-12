@@ -264,4 +264,62 @@ public class ReportManager {
         }
 
     }
+
+    public static void deliveryReport() {
+
+        String sql = """
+                SELECT d.delivery_id,
+                       po.order_number,
+                       p.product_name,
+                       d.delivered_quantity,
+                       d.delivered_to,
+                       u.name AS delivered_by,
+                       d.delivery_date
+                FROM deliveries d
+                INNER JOIN production_orders po
+                    ON d.order_id = po.order_id
+                INNER JOIN products p
+                    ON po.product_id = p.product_id
+                INNER JOIN users u
+                    ON d.delivered_by = u.user_id
+                ORDER BY d.delivery_date DESC, d.delivery_id DESC
+                """;
+
+        try (
+                Connection connection = DatabaseConnection.connectDatabase();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()
+        ) {
+
+            boolean found = false;
+
+            System.out.println();
+            System.out.println("==========================================");
+            System.out.println("\tDELIVERY REPORT");
+            System.out.println("==========================================");
+            System.out.println();
+
+            while (resultSet.next()) {
+                found = true;
+                System.out.println("------------------------------------------");
+                System.out.println("Delivery ID  : " + resultSet.getInt("delivery_id"));
+                System.out.println("Order Number : " + resultSet.getString("order_number"));
+                System.out.println("Product      : " + resultSet.getString("product_name"));
+                System.out.println("Quantity     : " + resultSet.getInt("delivered_quantity"));
+                System.out.println("Delivered To : " + resultSet.getString("delivered_to"));
+                System.out.println("Delivered By : " + resultSet.getString("delivered_by"));
+                System.out.println("Date         : " + resultSet.getTimestamp("delivery_date"));
+                System.out.println("------------------------------------------");
+            }
+
+            if (!found) {
+                System.out.println("No delivery records found.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Unable to generate delivery report.");
+            e.printStackTrace();
+        }
+
+    }
 }

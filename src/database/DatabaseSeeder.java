@@ -236,6 +236,11 @@ public class DatabaseSeeder {
     private static void seedProductionOrders(Statement statement) throws SQLException {
 
         statement.executeUpdate("""
+                DELETE FROM deliveries
+                WHERE order_id IN (1, 2, 3)
+                """);
+
+        statement.executeUpdate("""
                 INSERT IGNORE INTO production_orders
                     (order_id, order_number, product_id, machine_id, quantity,
                      completed_quantity, priority, deadline,
