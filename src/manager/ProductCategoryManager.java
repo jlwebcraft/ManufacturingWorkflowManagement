@@ -6,7 +6,8 @@ import util.ConsoleFormatter;
 
 import java.sql.*;
 
-public class ProductCategoryManager {
+public class
+ProductCategoryManager {
 
     public static void addCategory(ProductCategory category) {
 
